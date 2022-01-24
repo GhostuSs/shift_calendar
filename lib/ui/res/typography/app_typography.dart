@@ -20,6 +20,12 @@ abstract class AppTypography {
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.underline);
 
+  static const TextStyle normal14Black = TextStyle(
+      fontFamily: _fontFamily,
+      fontSize: 14,
+      color: ProjectColors.black,
+      fontWeight: FontWeight.w500);
+
   static const TextStyle semibold32White = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 32,

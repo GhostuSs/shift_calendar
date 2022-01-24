@@ -23,9 +23,22 @@ class OnboardingBtn extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               color: ProjectColors.white),
           child: Center(
-            child: Text(
-              label,
-              style: AppTypography.normal18Black,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  label,
+                  style: AppTypography.normal18Black,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: ProjectColors.black,
+                  size: 18,
+                )
+              ],
             ),
           ),
         ),
