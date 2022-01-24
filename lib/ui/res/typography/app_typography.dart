@@ -26,6 +26,18 @@ abstract class AppTypography {
       color: ProjectColors.black,
       fontWeight: FontWeight.w500);
 
+  static const TextStyle normal10Black = TextStyle(
+      fontFamily: _fontFamily,
+      fontSize: 10,
+      color: ProjectColors.black,
+      fontWeight: FontWeight.w400);
+
+  static const TextStyle normal16Gray = TextStyle(
+      fontFamily: _fontFamily,
+      fontSize: 16,
+      color: ProjectColors.usualGray,
+      fontWeight: FontWeight.w500);
+
   static const TextStyle semibold32White = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 32,

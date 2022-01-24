@@ -41,7 +41,22 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                       title,
                       style: AppTypography.semibold32White,
                     ),
-                  )
+                  ),
+                  Spacer(),
+                  addBtn == true
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: TextButton(
+                            child: const Text(
+                              'Save',
+                              style: AppTypography.normal16Gray,
+                            ),
+                            onPressed: () {
+                              print('saved');
+                            },
+                          ),
+                        )
+                      : Container()
                 ],
               )
             ],
