@@ -7,8 +7,14 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool? addBtn;
   final bool? backBtn;
+  final double height;
 
-  const RawAppBar({Key? key, required this.title, this.addBtn, this.backBtn})
+  const RawAppBar(
+      {Key? key,
+      required this.title,
+      this.addBtn,
+      this.backBtn,
+      required this.height})
       : super(key: key);
 
   @override
@@ -44,5 +50,5 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(126);
+  Size get preferredSize => Size.fromHeight(height * 0.136);
 }

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/btm_nav_bar.dart';
+import 'package:shift_calendar/ui/screens/calendar/ui/calendar_screen.dart';
 import 'package:shift_calendar/ui/screens/settings/ui/settings_screen.dart';
+import 'package:shift_calendar/ui/screens/templates/ui/templates_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,22 +29,13 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: ProjectColors.white,
       tabBar: btmNavBar(menuIndex),
       tabBuilder: (BuildContext context, _selectedIndex) {
-        List pages = [SettingsScreen(), SettingsScreen(), SettingsScreen()];
+        List pages = [
+          const CalendarScreen(),
+          TemplatesScreen(),
+          SettingsScreen()
+        ];
         return CupertinoTabView(builder: (context) {
-          switch (_selectedIndex) {
-            case 1:
-              {
-                return new SettingsScreen();
-              }
-            case 2:
-              {
-                return new SettingsScreen();
-              }
-            default:
-              {
-                return pages[_selectedIndex];
-              }
-          }
+          return pages[_selectedIndex];
         });
       },
     );

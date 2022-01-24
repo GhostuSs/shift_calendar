@@ -18,8 +18,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ProjectColors.white,
-      appBar: const RawAppBar(
+      appBar: RawAppBar(
         title: 'Settings',
+        height: MediaQuery.of(context).size.height,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
