@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shift_calendar/routes.dart';
+import 'package:shift_calendar/ui/res/theme.dart';
 
 import 'ui/res/colors/colors.dart';
 
@@ -29,7 +30,7 @@ class _App extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.dark(),
+        theme: AppTheme.theme,
         color: ProjectColors.white,
         debugShowCheckedModeBanner: false,
         initialRoute: seen == true ? '/' : '/onboarding',

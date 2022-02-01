@@ -10,6 +10,7 @@ abstract class ProjectColors {
   static const Color usualGray = Color(0xFFAFAFAF);
   static const Color backgroundGray = Color(0xFFE5E5E5);
   static const Color black = Colors.black;
+  static const Color amber = Color(0xFFFFC700);
   static const Color orange = Color(0xFFFF9900);
   static const Color darkBlue = Color(0xFF0038FF);
   static const Color lightBlue = Color(0xFF3B82F4);

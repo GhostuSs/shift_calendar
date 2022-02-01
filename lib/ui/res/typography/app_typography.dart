@@ -13,6 +13,12 @@ abstract class AppTypography {
       color: ProjectColors.black,
       fontWeight: FontWeight.w600);
 
+  static const TextStyle regular18Black = TextStyle(
+      fontFamily: _fontFamily,
+      fontSize: 18,
+      color: ProjectColors.black,
+      fontWeight: FontWeight.w400);
+
   static const TextStyle normal14GreyUnderlined = TextStyle(
       fontFamily: _fontFamily,
       fontSize: 14,

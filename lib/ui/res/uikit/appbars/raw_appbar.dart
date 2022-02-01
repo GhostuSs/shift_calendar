@@ -42,7 +42,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                       style: AppTypography.semibold32White,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   addBtn == true
                       ? Padding(
                           padding: const EdgeInsets.only(right: 16),

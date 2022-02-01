@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/btm_nav_bar.dart';
 import 'package:shift_calendar/ui/screens/calendar/ui/calendar_screen.dart';
 import 'package:shift_calendar/ui/screens/settings/ui/settings_screen.dart';
@@ -26,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-      backgroundColor: ProjectColors.white,
       tabBar: btmNavBar(menuIndex),
       tabBuilder: (BuildContext context, _selectedIndex) {
         List pages = [
