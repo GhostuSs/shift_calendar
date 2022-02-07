@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shift_calendar/routes.dart';
 import 'package:shift_calendar/ui/res/theme.dart';
 
+import 'data/template_data.dart';
 import 'ui/res/colors/colors.dart';
 
 bool seen = false;
@@ -29,11 +31,16 @@ class App extends StatefulWidget{
 class _App extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: AppTheme.theme,
-        color: ProjectColors.white,
-        debugShowCheckedModeBanner: false,
-        initialRoute: seen == true ? '/' : '/onboarding',
-        routes: routes);
+    return MultiProvider(
+      providers: [
+        Provider<TemplateData>(create: (_) => TemplateData()),
+      ],
+      child: MaterialApp(
+          theme: AppTheme.theme,
+          color: ProjectColors.white,
+          debugShowCheckedModeBanner: false,
+          initialRoute: seen == true ? '/' : '/onboarding',
+          routes: routes),
+    );
   }
 }

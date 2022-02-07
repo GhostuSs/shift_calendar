@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shift_calendar/data/template_data.dart';
 import 'package:shift_calendar/ui/res/images/icons.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
@@ -23,9 +25,11 @@ class _TemplateScreenState extends State<TemplateScreen> {
   TextEditingController descController = TextEditingController();
   bool allDayEnable = false;
   bool notificationsEnable = false;
+  final UniqueKey _key = UniqueKey();
 
   @override
   Widget build(BuildContext context) {
+    final TemplateData prov = context.read<TemplateData>();
     return Scaffold(
       appBar: RawAppBar(
         height: MediaQuery.of(context).size.height,
@@ -74,13 +78,15 @@ class _TemplateScreenState extends State<TemplateScreen> {
                           Container(
                             width: 18,
                             height: 18,
-                            child: Image.asset(AppIcons.sun),
+                            child: iconSelector(),
                           ),
                           IconButton(
                               onPressed: () => showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) =>
-                                      IconBtmSheet()),
+                                      IconBtmSheet(
+                                        notifyParent: () => setState(() {}),
+                                      )),
                               icon: Icon(
                                 Icons.arrow_forward_ios,
                                 color: ProjectColors.black,
@@ -196,7 +202,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             top: 10, bottom: 10, left: 15),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Finish',
                               style: AppTypography.normal14Black,
                             ),
@@ -211,7 +217,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                         TimeBtmSheet(
                                           label: 'Start',
                                         )),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_forward_ios,
                                   color: ProjectColors.black,
                                   size: 10,
@@ -237,11 +243,11 @@ class _TemplateScreenState extends State<TemplateScreen> {
                       focusColor: ProjectColors.white,
                       splashColor: ProjectColors.white,
                       child: Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             top: 10, bottom: 10, left: 15, right: 5),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Notifications',
                               style: AppTypography.normal14Black,
                             ),
@@ -262,5 +268,57 @@ class _TemplateScreenState extends State<TemplateScreen> {
         ),
       ),
     );
+  }
+
+  Widget iconSelector() {
+    switch (context.read<TemplateData>().iconIndex) {
+      case 0:
+        {
+          return Image.asset(AppIcons.sun);
+        }
+      case 1:
+        {
+          return Image.asset(AppIcons.moon);
+        }
+      case 2:
+        {
+          return Image.asset(AppIcons.home);
+        }
+      case 3:
+        {
+          return const Icon(
+            Icons.favorite,
+            size: 18,
+          );
+        }
+      case 4:
+        {
+          return Image.asset(AppIcons.wallet);
+        }
+      case 5:
+        {
+          return Image.asset(AppIcons.attention);
+        }
+      case 6:
+        {
+          return Image.asset(AppIcons.calendar);
+        }
+      case 7:
+        {
+          return Image.asset(AppIcons.star);
+        }
+      case 8:
+        {
+          return Image.asset(AppIcons.time);
+        }
+      case 9:
+        {
+          return Image.asset(AppIcons.people);
+        }
+      default:
+        {
+          return Image.asset(AppIcons.sun);
+        }
+    }
   }
 }

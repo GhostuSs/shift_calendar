@@ -1,0 +1,3 @@
+class TemplateData {
+  int? iconIndex;
+}
