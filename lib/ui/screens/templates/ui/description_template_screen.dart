@@ -8,6 +8,7 @@ import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
 import 'package:shift_calendar/ui/res/uikit/bottomsheets/color_btm_sheet.dart';
 import 'package:shift_calendar/ui/res/uikit/bottomsheets/time_sheet.dart';
 
+import '../../../../data/templates_data.dart';
 import '../../../res/colors/colors.dart';
 import '../../../res/uikit/bottomsheets/icon_bottomsheet.dart';
 
@@ -23,19 +24,29 @@ class TemplateScreen extends StatefulWidget {
 class _TemplateScreenState extends State<TemplateScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
-  bool allDayEnable = false;
-  bool notificationsEnable = false;
-  final UniqueKey _key = UniqueKey();
+
+  @override
+  void initState() {
+    context.read<TemplateData>().init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TemplateData prov = context.read<TemplateData>();
     return Scaffold(
       appBar: RawAppBar(
         height: MediaQuery.of(context).size.height,
         title: 'Template',
         backBtn: true,
         addBtn: true,
+        onPressed: () {
+          context
+              .read<Templates>()
+              .templates
+              ?.add(context.read<TemplateData>());
+          context.read<TemplateData>().init();
+          Navigator.pop(context);
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -43,16 +54,19 @@ class _TemplateScreenState extends State<TemplateScreen> {
           children: [
             TextFormField(
               controller: nameController,
-              decoration: InputDecoration(hintText: 'Name'),
+              decoration: const InputDecoration(hintText: 'Name'),
+              onChanged: (value) => {context.read<TemplateData>().name = value},
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
+              padding: const EdgeInsets.symmetric(vertical: 15),
               child: TextFormField(
                 minLines: 2,
                 maxLines: 4,
                 maxLength: 30,
                 controller: descController,
-                decoration: InputDecoration(hintText: 'Write a note'),
+                onChanged: (value) =>
+                    {context.read<TemplateData>().note = value},
+                decoration: const InputDecoration(hintText: 'Write a note'),
               ),
             ),
             Container(
@@ -113,13 +127,14 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               width: 18,
                               height: 18,
                               decoration: BoxDecoration(
-                                  color: ProjectColors.darkBlue,
+                                  color: context.read<TemplateData>().color,
                                   borderRadius: BorderRadius.circular(9.0))),
                           IconButton(
                               onPressed: () => showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) =>
-                                      ColorBtmSheet()),
+                                      ColorBtmSheet(
+                                          notifyParent: () => setState(() {}))),
                               icon: const Icon(
                                 Icons.arrow_forward_ios,
                                 color: ProjectColors.black,
@@ -155,9 +170,11 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             ),
                             Spacer(),
                             CupertinoSwitch(
-                                value: allDayEnable,
-                                onChanged: (value) =>
-                                    setState(() => allDayEnable = value))
+                                value: context.read<TemplateData>().allDay ??
+                                    false,
+                                onChanged: (value) => setState(() => context
+                                    .read<TemplateData>()
+                                    .allDay = value))
                           ],
                         ),
                       ),
@@ -170,12 +187,13 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             top: 10, bottom: 10, left: 15),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Start',
                               style: AppTypography.normal14Black,
                             ),
                             Spacer(),
-                            Text('09:00'),
+                            Text(formatTime(
+                                context.read<TemplateData>().startTime!)),
                             IconButton(
                                 splashRadius: 1.0,
                                 iconSize: 10,
@@ -183,9 +201,10 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         TimeBtmSheet(
-                                          label: 'Start',
+                                          notifyParent: () => setState(() {}),
+                                          typeOfTime: TypeOfTime.start,
                                         )),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_forward_ios,
                                   color: ProjectColors.black,
                                   size: 10,
@@ -206,8 +225,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               'Finish',
                               style: AppTypography.normal14Black,
                             ),
-                            Spacer(),
-                            Text('23:00'),
+                            const Spacer(),
+                            Text(formatTime(
+                                context.read<TemplateData>().endTime!)),
                             IconButton(
                                 splashRadius: 1.0,
                                 iconSize: 10,
@@ -215,7 +235,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         TimeBtmSheet(
-                                          label: 'Start',
+                                          notifyParent: () => setState(() {}),
+                                          typeOfTime: TypeOfTime.finish,
                                         )),
                                 icon: const Icon(
                                   Icons.arrow_forward_ios,
@@ -253,9 +274,13 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             ),
                             Spacer(),
                             CupertinoSwitch(
-                                value: notificationsEnable,
-                                onChanged: (value) =>
-                                    setState(() => notificationsEnable = value))
+                                value: context
+                                        .read<TemplateData>()
+                                        .notifications ??
+                                    false,
+                                onChanged: (value) => setState(() => context
+                                    .read<TemplateData>()
+                                    .notifications = value))
                           ],
                         ),
                       ),
@@ -320,5 +345,15 @@ class _TemplateScreenState extends State<TemplateScreen> {
           return Image.asset(AppIcons.sun);
         }
     }
+  }
+
+  String formatTime(Duration time) {
+    String retData = '';
+    retData = time.inHours < 10 ? '0${time.inHours}' : '${time.inHours}';
+    retData = time.inMinutes % 60 < 10
+        ? retData + ':0${time.inMinutes % 60}'
+        : retData + ':${time.inMinutes % 60}';
+    print('retData $retData');
+    return retData;
   }
 }

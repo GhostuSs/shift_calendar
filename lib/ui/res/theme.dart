@@ -10,15 +10,15 @@ abstract class AppTheme {
         border: InputBorder.none,
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
-            borderSide: const BorderSide(color: ProjectColors.lightGray)),
+            borderSide: const BorderSide(color: ProjectColors.darkGray)),
         errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
-            borderSide: BorderSide(color: ProjectColors.darkGray)),
+            borderSide: BorderSide(color: ProjectColors.backgroundGray)),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
-            borderSide: BorderSide(color: ProjectColors.darkGray)),
+            borderSide: BorderSide(color: ProjectColors.backgroundGray)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
-            borderSide: BorderSide(color: ProjectColors.darkGray))),
+            borderSide: BorderSide(color: ProjectColors.backgroundGray))),
   );
 }

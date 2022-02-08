@@ -8,13 +8,15 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? addBtn;
   final bool? backBtn;
   final double height;
+  final void Function()? onPressed;
 
   const RawAppBar(
       {Key? key,
       required this.title,
       this.addBtn,
       this.backBtn,
-      required this.height})
+      required this.height,
+      this.onPressed})
       : super(key: key);
 
   @override
@@ -31,7 +33,10 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   backBtn == true
                       ? IconButton(
-                          icon: const Icon(Icons.arrow_back_ios),
+                    icon: const Icon(
+                            Icons.arrow_back_ios,
+                            color: ProjectColors.white,
+                          ),
                           onPressed: () => Navigator.pop(context),
                         )
                       : Container(),
@@ -51,9 +56,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                               'Save',
                               style: AppTypography.normal16Gray,
                             ),
-                            onPressed: () {
-                              print('saved');
-                            },
+                            onPressed: onPressed ?? () => null,
                           ),
                         )
                       : Container()
