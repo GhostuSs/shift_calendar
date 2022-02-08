@@ -23,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         height: MediaQuery.of(context).size.height,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
         child: Column(
           children: [
             SettingsCard(
@@ -34,6 +34,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               text: 'Terms of Use',
               onPressed: () {},
             ),
+            SizedBox(
+              height: 5,
+            ),
             SettingsCard(
               icon: const Icon(
                 Icons.privacy_tip_rounded,
@@ -41,6 +44,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               text: 'Privacy policy',
               onPressed: () {},
+            ),
+            SizedBox(
+              height: 5,
             ),
             SettingsCard(
               icon: const Icon(
@@ -50,6 +56,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               text: 'Support',
               onPressed: () {},
             ),
+            SizedBox(
+              height: 5,
+            ),
             SettingsCard(
               icon: const Icon(
                 Icons.star_rate_rounded,
@@ -57,6 +66,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               text: 'Rate app',
               onPressed: () {},
+            ),
+            SizedBox(
+              height: 5,
             ),
             SettingsCard(
               icon: const Icon(

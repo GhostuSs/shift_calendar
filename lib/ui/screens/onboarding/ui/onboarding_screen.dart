@@ -28,15 +28,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               padding: const EdgeInsets.only(bottom: 52),
               child: OnboardingBtn(
                   label: 'Continue',
-                  onPressed: () =>
-                      currentIndex < OnBoardingImages.dataList.length - 1
-                          ? setState(() {
-                              currentIndex++;
-                              pageController.animateToPage(currentIndex,
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.linear);
-                            })
-                          : Navigator.pushNamed(context, '/')),
+                  onPressed: () {
+                    if (currentIndex < OnBoardingImages.dataList.length - 1) {
+                      currentIndex++;
+                      pageController.animateToPage(currentIndex,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.linear);
+                    } else {
+                      Navigator.pushNamed(context, '/');
+                    }
+                  }),
             ),
             Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50, bottom: 56),
