@@ -11,14 +11,14 @@ class TemplateData {
   bool? allDay;
   bool? notifications;
 
-  void init() {
-    this.name = '';
-    this.note = '';
-    this.iconIndex = 0;
-    this.color = ProjectColors.lightBlue;
-    this.startTime = Duration(hours: 0, seconds: 0);
-    this.endTime = Duration(hours: 0, seconds: 0);
-    this.allDay = false;
-    this.notifications = false;
+  void init(TemplateData? data) {
+    this.name = data?.name ?? '';
+    this.note = data?.note ?? '';
+    this.iconIndex = data?.iconIndex ?? 0;
+    this.color = data?.color ?? ProjectColors.lightBlue;
+    this.startTime = data?.startTime ?? Duration(hours: 0, seconds: 0);
+    this.endTime = data?.endTime ?? Duration(hours: 0, seconds: 0);
+    this.allDay = data?.allDay ?? false;
+    this.notifications = data?.notifications ?? false;
   }
 }

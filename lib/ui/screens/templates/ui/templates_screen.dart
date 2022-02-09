@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shift_calendar/data/template_data.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
 import 'package:shift_calendar/ui/screens/templates/ui/uikit/templates_card.dart';
 
-import '../../../res/images/icons.dart';
+import '../../../../data/templates_data.dart';
 import 'description_template_screen.dart';
 
 class TemplatesScreen extends StatefulWidget {
@@ -15,19 +17,47 @@ class TemplatesScreen extends StatefulWidget {
   }
 }
 
-onPressed(BuildContext context) {
-  Navigator.push(context,
-      MaterialPageRoute(builder: (BuildContext context) => TemplateScreen()));
+onPressed(BuildContext context, int index) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (BuildContext context) => TemplateScreen(
+                data: context.read<Templates>().templates![index],
+              )));
 }
 
 class _TemplatesScreenState extends State<TemplatesScreen> {
+  final TemplateData _initialTemplateData = TemplateData();
+
+  @override
+  initState() {
+    _initialTemplateData.init(null);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Templates prov = context.read<Templates>();
     return Scaffold(
       appBar: RawAppBar(
         height: MediaQuery.of(context).size.height,
         title: 'Templates',
       ),
+      floatingActionButton: context.read<Templates>().templates?.isEmpty == true
+          ? FloatingActionButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => TemplateScreen(
+                            data: _initialTemplateData,
+                          ))),
+              backgroundColor: ProjectColors.black,
+              child: const Icon(
+                Icons.add,
+                color: ProjectColors.white,
+              ),
+            )
+          : Container(),
       backgroundColor: ProjectColors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -35,48 +65,11 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
           children: [
             Column(
               children: [
-                TemplatesCard(
-                  icon: AppIcons.sun,
-                  text: 'Day work shift',
-                  onPressed: () => onPressed(context),
-                  iconColor: ProjectColors.darkBlue,
-                  subtext: '9:00 am - 05:00 pm',
-                ),
-                TemplatesCard(
-                  icon: AppIcons.moon,
-                  text: 'Night work shift',
-                  onPressed: () => onPressed(context),
-                  iconColor: ProjectColors.darkGray,
-                  subtext: '10:00 pm - 06:00 am',
-                ),
-                TemplatesCard(
-                  icon: AppIcons.home,
-                  text: 'Weekend',
-                  onPressed: () => onPressed(context),
-                  iconColor: ProjectColors.orange,
-                  subtext: 'All day',
-                ),
-                TemplatesCard(
-                  icon: AppIcons.sun,
-                  text: 'Day work shift',
-                  onPressed: () => onPressed(context),
-                  iconColor: ProjectColors.darkBlue,
-                  subtext: '9:00 am - 05:00 pm',
-                ),
-                TemplatesCard(
-                  icon: AppIcons.wallet,
-                  text: 'Salary',
-                  onPressed: () => onPressed(context),
-                  iconColor: ProjectColors.darkGreen,
-                  subtext: 'All day',
-                ),
-                TemplatesCard(
-                  icon: AppIcons.attention,
-                  text: 'Important day',
-                  onPressed: () => onPressed(context),
-                  iconColor: ProjectColors.purple,
-                  subtext: 'All day',
-                ),
+                for (int index = 0; index < prov.templates!.length; index++)
+                  TemplatesCard(
+                    onPressed: () => onPressed(context, index),
+                    data: prov.templates![index],
+                  ),
               ],
             )
           ],

@@ -13,7 +13,9 @@ import '../../../res/colors/colors.dart';
 import '../../../res/uikit/bottomsheets/icon_bottomsheet.dart';
 
 class TemplateScreen extends StatefulWidget {
-  const TemplateScreen({Key? key}) : super(key: key);
+  final TemplateData data;
+
+  const TemplateScreen({required this.data});
 
   @override
   State<StatefulWidget> createState() {
@@ -27,7 +29,6 @@ class _TemplateScreenState extends State<TemplateScreen> {
 
   @override
   void initState() {
-    context.read<TemplateData>().init();
     super.initState();
   }
 
@@ -44,7 +45,6 @@ class _TemplateScreenState extends State<TemplateScreen> {
               .read<Templates>()
               .templates
               ?.add(context.read<TemplateData>());
-          context.read<TemplateData>().init();
           Navigator.pop(context);
         },
       ),
@@ -80,15 +80,15 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     focusColor: ProjectColors.white,
                     splashColor: ProjectColors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           top: 10, bottom: 10, left: 15, right: 5),
                       child: Row(
                         children: [
-                          Text(
+                          const Text(
                             'Select icon',
                             style: AppTypography.normal14Black,
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Container(
                             width: 18,
                             height: 18,
@@ -101,7 +101,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                       IconBtmSheet(
                                         notifyParent: () => setState(() {}),
                                       )),
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_forward_ios,
                                 color: ProjectColors.black,
                                 size: 10,
@@ -122,7 +122,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             'Select color',
                             style: AppTypography.normal14Black,
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Container(
                               width: 18,
                               height: 18,
@@ -160,21 +160,19 @@ class _TemplateScreenState extends State<TemplateScreen> {
                       focusColor: ProjectColors.white,
                       splashColor: ProjectColors.white,
                       child: Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             top: 10, bottom: 10, left: 15, right: 5),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'All day',
                               style: AppTypography.normal14Black,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             CupertinoSwitch(
-                                value: context.read<TemplateData>().allDay ??
-                                    false,
-                                onChanged: (value) => setState(() => context
-                                    .read<TemplateData>()
-                                    .allDay = value))
+                                value: widget.data.allDay ?? false,
+                                onChanged: (value) =>
+                                    setState(() => widget.data.allDay = value))
                           ],
                         ),
                       ),
@@ -191,9 +189,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               'Start',
                               style: AppTypography.normal14Black,
                             ),
-                            Spacer(),
-                            Text(formatTime(
-                                context.read<TemplateData>().startTime!)),
+                            const Spacer(),
+                            Text(formatTime(widget.data.startTime!)),
                             IconButton(
                                 splashRadius: 1.0,
                                 iconSize: 10,
@@ -226,8 +223,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               style: AppTypography.normal14Black,
                             ),
                             const Spacer(),
-                            Text(formatTime(
-                                context.read<TemplateData>().endTime!)),
+                            Text(formatTime(widget.data.endTime!)),
                             IconButton(
                                 splashRadius: 1.0,
                                 iconSize: 10,
@@ -272,7 +268,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               'Notifications',
                               style: AppTypography.normal14Black,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             CupertinoSwitch(
                                 value: context
                                         .read<TemplateData>()
@@ -296,7 +292,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
   }
 
   Widget iconSelector() {
-    switch (context.read<TemplateData>().iconIndex) {
+    switch (widget.data.iconIndex) {
       case 0:
         {
           return Image.asset(AppIcons.sun);
@@ -353,7 +349,6 @@ class _TemplateScreenState extends State<TemplateScreen> {
     retData = time.inMinutes % 60 < 10
         ? retData + ':0${time.inMinutes % 60}'
         : retData + ':${time.inMinutes % 60}';
-    print('retData $retData');
     return retData;
   }
 }

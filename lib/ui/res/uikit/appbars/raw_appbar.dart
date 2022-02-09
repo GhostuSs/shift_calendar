@@ -23,22 +23,25 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      color: ProjectColors.black,
+      decoration: BoxDecoration(
+          color: ProjectColors.black,
+          border: Border.all(color: ProjectColors.black)),
       child: Padding(
           padding: const EdgeInsets.only(bottom: 18),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Row(
                 children: [
                   backBtn == true
                       ? IconButton(
-                    icon: const Icon(
+                          icon: const Icon(
                             Icons.arrow_back_ios,
                             color: ProjectColors.white,
                           ),
                           onPressed: () => Navigator.pop(context),
-                        )
+                  )
                       : Container(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16),
@@ -50,15 +53,15 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                   const Spacer(),
                   addBtn == true
                       ? Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: TextButton(
-                            child: const Text(
-                              'Save',
-                              style: AppTypography.normal16Gray,
-                            ),
-                            onPressed: onPressed ?? () => null,
-                          ),
-                        )
+                    padding: const EdgeInsets.only(right: 16),
+                    child: TextButton(
+                      child: const Text(
+                        'Save',
+                        style: AppTypography.normal16Gray,
+                      ),
+                      onPressed: onPressed ?? () => null,
+                    ),
+                  )
                       : Container()
                 ],
               )

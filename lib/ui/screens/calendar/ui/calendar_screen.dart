@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../../../data/templates_data.dart';
+import '../../../res/theme.dart';
+import '../../../res/uikit/icon/raw_icon.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -13,9 +18,19 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  DateTime selectedDay = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ProjectColors.black,
+        onPressed: () {},
+        child: Icon(
+          Icons.edit,
+          color: ProjectColors.white,
+        ),
+      ),
       appBar: RawAppBar(
         height: MediaQuery.of(context).size.height,
         title: formatDate(),
@@ -23,36 +38,75 @@ class _CalendarScreenState extends State<CalendarScreen> {
       backgroundColor: ProjectColors.white,
       body: Column(
         children: [
-          SizedBox(
-            height: 30,
+          Container(
+            color: ProjectColors.black,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  children: const [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Text(
+                        '1231231312312313123123131231231312312313123123131231231312312313123123131231231312312313123123131231231312312313',
+                        style: TextStyle(
+                            color: ProjectColors.white,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Container(
+                  child: Text(
+                    'give a receipt',
+                    style: TextStyle(color: ProjectColors.black, fontSize: 14),
+                  ),
+                )
+              ],
+            ),
           ),
-          TableCalendar(
-            currentDay: DateTime.now(),
-            calendarStyle: const CalendarStyle(
-                markerMargin: EdgeInsets.zero,
-                cellMargin: EdgeInsets.zero,
-                cellPadding: EdgeInsets.zero,
-                canMarkersOverflow: true,
-                disabledTextStyle:
-                    TextStyle(color: ProjectColors.black, fontSize: 17.0),
-                selectedTextStyle:
-                    TextStyle(color: ProjectColors.white, fontSize: 17.0),
-                defaultTextStyle:
-                    TextStyle(color: ProjectColors.black, fontSize: 17.0),
-                outsideTextStyle:
-                    TextStyle(color: ProjectColors.black, fontSize: 17.0),
-                weekendDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: ProjectColors.lightGray),
-                todayDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: ProjectColors.black),
-                selectedDecoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: ProjectColors.black)),
-            headerVisible: false,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            rowHeight: 88,
-            focusedDay: DateTime.now(),
-            firstDay: DateTime(2022),
-            lastDay: DateTime(2023),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TableCalendar(
+              currentDay: selectedDay,
+              onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                setState(() {
+                  print(selectDay);
+                  selectedDay = selectDay;
+                });
+              },
+              calendarStyle: AppTheme.calendarStyle,
+              headerVisible: false,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              rowHeight: 100,
+              focusedDay: selectedDay,
+              daysOfWeekHeight: 30,
+              firstDay: DateTime(DateTime.now().year - 1),
+              lastDay: DateTime(DateTime.now().year + 1),
+            ),
+          ),
+          const Spacer(),
+          Container(
+            height: 80,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                for (int index = 0;
+                    index < context.read<Templates>().templates!.length;
+                    index++)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7),
+                    child: RawIcon(
+                      size: 30,
+                      data: context.read<Templates>().templates![index],
+                    ),
+                  )
+              ],
+            ),
           )
         ],
       ),
@@ -61,8 +115,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   String formatDate() {
     String retData = '';
-    retData = DateTime.now().day.toString();
-    retData = month(DateTime.now()) + retData;
+    retData = selectedDay.day.toString();
+    retData = month(selectedDay) + retData;
 
     return retData;
   }
