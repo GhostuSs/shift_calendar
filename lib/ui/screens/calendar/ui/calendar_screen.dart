@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
+import 'package:shift_calendar/ui/screens/calendar/ui/descriptionDayScreen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../data/templates_data.dart';
@@ -17,6 +18,7 @@ class CalendarScreen extends StatefulWidget {
   }
 }
 
+//TODO: Доделать
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDay = DateTime.now();
 
@@ -25,8 +27,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: ProjectColors.black,
-        onPressed: () {},
-        child: Icon(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      DayTemplates(day: selectedDay)));
+        },
+        child: const Icon(
           Icons.edit,
           color: ProjectColors.white,
         ),
@@ -58,9 +66,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Container(
-                  child: Text(
+                  child: const Text(
                     'give a receipt',
                     style: TextStyle(color: ProjectColors.black, fontSize: 14),
                   ),
@@ -81,11 +89,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
               calendarStyle: AppTheme.calendarStyle,
               headerVisible: false,
               startingDayOfWeek: StartingDayOfWeek.monday,
-              rowHeight: 100,
+              rowHeight: 88,
               focusedDay: selectedDay,
               daysOfWeekHeight: 30,
               firstDay: DateTime(DateTime.now().year - 1),
               lastDay: DateTime(DateTime.now().year + 1),
+              eventLoader: (DateTime date) {
+                return [DateTime.now()];
+              },
             ),
           ),
           const Spacer(),

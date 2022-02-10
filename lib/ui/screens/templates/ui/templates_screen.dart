@@ -17,15 +17,6 @@ class TemplatesScreen extends StatefulWidget {
   }
 }
 
-onPressed(BuildContext context, int index) {
-  Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (BuildContext context) => TemplateScreen(
-                data: context.read<Templates>().templates![index],
-              )));
-}
-
 class _TemplatesScreenState extends State<TemplatesScreen> {
   final TemplateData _initialTemplateData = TemplateData();
 
@@ -50,6 +41,7 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
                   MaterialPageRoute(
                       builder: (BuildContext context) => TemplateScreen(
                             data: _initialTemplateData,
+                            notifyParent: () => setState(() {}),
                           ))),
               backgroundColor: ProjectColors.black,
               child: const Icon(
@@ -76,5 +68,15 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
         ),
       ),
     );
+  }
+
+  onPressed(BuildContext context, int index) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => TemplateScreen(
+                  data: context.read<Templates>().templates![index],
+                  notifyParent: () => setState(() {}),
+                )));
   }
 }

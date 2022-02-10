@@ -13,9 +13,10 @@ import '../../../res/colors/colors.dart';
 import '../../../res/uikit/bottomsheets/icon_bottomsheet.dart';
 
 class TemplateScreen extends StatefulWidget {
-  final TemplateData data;
+  final TemplateData? data;
+  final void Function() notifyParent;
 
-  const TemplateScreen({required this.data});
+  const TemplateScreen({this.data, required this.notifyParent});
 
   @override
   State<StatefulWidget> createState() {
@@ -24,11 +25,15 @@ class TemplateScreen extends StatefulWidget {
 }
 
 class _TemplateScreenState extends State<TemplateScreen> {
+  late TemplateData templateData;
   TextEditingController nameController = TextEditingController();
   TextEditingController descController = TextEditingController();
 
   @override
   void initState() {
+    templateData = widget.data ?? TemplateData();
+    nameController.text = templateData.name ?? '';
+    descController.text = templateData.note ?? '';
     super.initState();
   }
 
@@ -41,10 +46,13 @@ class _TemplateScreenState extends State<TemplateScreen> {
         backBtn: true,
         addBtn: true,
         onPressed: () {
-          context
-              .read<Templates>()
-              .templates
-              ?.add(context.read<TemplateData>());
+          final Templates prov = context.read<Templates>();
+          if (prov.templates!.contains(templateData)) {
+            //TODO:Логика редактирования
+          } else {
+            context.read<Templates>().templates!.add(templateData);
+          }
+          widget.notifyParent();
           Navigator.pop(context);
         },
       ),
@@ -55,7 +63,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
             TextFormField(
               controller: nameController,
               decoration: const InputDecoration(hintText: 'Name'),
-              onChanged: (value) => {context.read<TemplateData>().name = value},
+              onChanged: (value) => {templateData.name = value},
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
@@ -64,8 +72,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                 maxLines: 4,
                 maxLength: 30,
                 controller: descController,
-                onChanged: (value) =>
-                    {context.read<TemplateData>().note = value},
+                onChanged: (value) => {templateData.note = value},
                 decoration: const InputDecoration(hintText: 'Write a note'),
               ),
             ),
@@ -170,9 +177,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             ),
                             const Spacer(),
                             CupertinoSwitch(
-                                value: widget.data.allDay ?? false,
+                                value: templateData.allDay ?? false,
                                 onChanged: (value) =>
-                                    setState(() => widget.data.allDay = value))
+                                    setState(() => templateData.allDay = value))
                           ],
                         ),
                       ),
@@ -190,7 +197,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               style: AppTypography.normal14Black,
                             ),
                             const Spacer(),
-                            Text(formatTime(widget.data.startTime!)),
+                            Text(formatTime(templateData.startTime ??
+                                const Duration(hours: 0, seconds: 0))),
                             IconButton(
                                 splashRadius: 1.0,
                                 iconSize: 10,
@@ -223,7 +231,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               style: AppTypography.normal14Black,
                             ),
                             const Spacer(),
-                            Text(formatTime(widget.data.endTime!)),
+                            Text(formatTime(templateData.endTime ??
+                                const Duration(hours: 0, seconds: 0))),
                             IconButton(
                                 splashRadius: 1.0,
                                 iconSize: 10,
@@ -271,8 +280,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             const Spacer(),
                             CupertinoSwitch(
                                 value: context
-                                        .read<TemplateData>()
-                                        .notifications ??
+                                    .read<TemplateData>()
+                                    .notifications ??
                                     false,
                                 onChanged: (value) => setState(() => context
                                     .read<TemplateData>()
@@ -292,7 +301,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
   }
 
   Widget iconSelector() {
-    switch (widget.data.iconIndex) {
+    switch (templateData.iconIndex) {
       case 0:
         {
           return Image.asset(AppIcons.sun);
