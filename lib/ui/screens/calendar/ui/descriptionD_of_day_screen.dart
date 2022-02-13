@@ -85,13 +85,23 @@ class _DayTemplatesState extends State<DayTemplates> {
                     for (int index = 0;
                         index < context.read<Templates>().templates!.length;
                         index++)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 7),
-                        child: RawIcon(
-                          size: 30,
-                          data: context.read<Templates>().templates![index],
-                        ),
-                      )
+                      (context.read<Templates>().templates![index].date?.day ==
+                                  widget.day.day &&
+                              context
+                                      .read<Templates>()
+                                      .templates![index]
+                                      .date
+                                      ?.month ==
+                                  widget.day.month)
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 7),
+                              child: RawIcon(
+                                size: 30,
+                                data:
+                                    context.read<Templates>().templates![index],
+                              ),
+                            )
+                          : Container()
                   ],
                 ),
               )
