@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 
@@ -8,8 +7,9 @@ import '../../images/icons.dart';
 
 class IconBtmSheet extends StatefulWidget {
   final void Function() notifyParent;
+  final TemplateData templateData;
 
-  const IconBtmSheet({required this.notifyParent});
+  const IconBtmSheet({required this.notifyParent, required this.templateData});
 
   @override
   State<StatefulWidget> createState() {
@@ -23,7 +23,7 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.3,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         child: Column(
           children: [
             const Padding(
@@ -45,8 +45,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                         child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 0
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 0
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -63,8 +63,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 1
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 1
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -81,8 +81,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 2
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 2
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -99,10 +99,10 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 3
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 3
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             radius: 30,
                             backgroundColor: ProjectColors.backgroundGray,
                             child: Icon(
@@ -120,8 +120,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 4
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 4
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -131,7 +131,7 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Flex(
@@ -146,8 +146,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 5
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 5
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -165,8 +165,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 6
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 6
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -183,8 +183,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 7
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 7
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -201,8 +201,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 8
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 8
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -219,8 +219,8 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
                       child: CircleAvatar(
                           radius: 32,
                           backgroundColor:
-                              context.read<TemplateData>().iconIndex == 9
-                                  ? ProjectColors.black
+                          widget.templateData.iconIndex == 9
+                              ? ProjectColors.black
                                   : ProjectColors.lightGray,
                           child: CircleAvatar(
                             radius: 30,
@@ -238,7 +238,7 @@ class _IconBtmSheetState extends State<IconBtmSheet> {
 
   void _onTap(int index) {
     setState(() {
-      context.read<TemplateData>().iconIndex = index;
+      widget.templateData.iconIndex = index;
     });
     widget.notifyParent();
   }

@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shift_calendar/routes.dart';
 import 'package:shift_calendar/ui/res/theme.dart';
 
-import 'data/template_data.dart';
 import 'data/templates_data.dart';
 import 'ui/res/colors/colors.dart';
 
@@ -36,7 +35,7 @@ class _App extends State<App> {
     return MultiProvider(
       providers: [
         Provider<Templates>(create: (_) => Templates()),
-        Provider<TemplateData>(create: (_) => TemplateData()),
+        //Provider<TemplateData>(create: (_) => TemplateData()),
       ],
       child: MaterialApp(
           theme: AppTheme.theme,

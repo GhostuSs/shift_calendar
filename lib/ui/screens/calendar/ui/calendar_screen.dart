@@ -52,14 +52,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
-                    SizedBox(
+                  children: [
+                    const SizedBox(
                       width: 20,
                     ),
                     Expanded(
                       child: Text(
-                        '1231231312312313123123131231231312312313123123131231231312312313123123131231231312312313123123131231231312312313',
-                        style: TextStyle(
+                        '(${context.read<Templates>().templates?.first.name} / ${formatTime(context.read<Templates>().templates?.first.startTime ?? const Duration(hours: 0, minutes: 0))} - ${formatTime(context.read<Templates>().templates?.first.endTime ?? const Duration(hours: 0, minutes: 0))})',
+                        style: const TextStyle(
                             color: ProjectColors.white,
                             overflow: TextOverflow.ellipsis),
                       ),
@@ -188,5 +188,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
           return 'Unknown';
         }
     }
+  }
+
+  String formatTime(Duration time) {
+    String retData = '';
+    retData = time.inHours < 10 ? '0${time.inHours}' : '${time.inHours}';
+    retData = time.inMinutes % 60 < 10
+        ? retData + ':0${time.inMinutes % 60}'
+        : retData + ':${time.inMinutes % 60}';
+    return retData;
   }
 }

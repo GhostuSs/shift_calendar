@@ -48,10 +48,19 @@ class _TemplateScreenState extends State<TemplateScreen> {
         onPressed: () {
           final Templates prov = context.read<Templates>();
           if (prov.templates!.contains(templateData)) {
-            //TODO:Логика редактирования
           } else {
             context.read<Templates>().templates!.add(templateData);
           }
+          print(context.read<Templates>().templates?.first.name);
+          print(context.read<Templates>().templates?.first.note);
+          print(context.read<Templates>().templates?.first.iconIndex);
+          print(context.read<Templates>().templates?.first.color);
+          print(context.read<Templates>().templates?.first.allDay);
+          print(context.read<Templates>().templates?.first.startTime);
+          print(context.read<Templates>().templates?.first.endTime);
+          print(context.read<Templates>().templates?.first.date);
+          print(context.read<Templates>().templates?.first.notifications);
+
           widget.notifyParent();
           Navigator.pop(context);
         },
@@ -106,6 +115,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                   context: context,
                                   builder: (BuildContext context) =>
                                       IconBtmSheet(
+                                        templateData: templateData,
                                         notifyParent: () => setState(() {}),
                                       )),
                               icon: const Icon(
@@ -134,13 +144,14 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               width: 18,
                               height: 18,
                               decoration: BoxDecoration(
-                                  color: context.read<TemplateData>().color,
+                                  color: templateData.color,
                                   borderRadius: BorderRadius.circular(9.0))),
                           IconButton(
                               onPressed: () => showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) =>
                                       ColorBtmSheet(
+                                          templateData: templateData,
                                           notifyParent: () => setState(() {}))),
                               icon: const Icon(
                                 Icons.arrow_forward_ios,
@@ -206,6 +217,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         TimeBtmSheet(
+                                          templateData: templateData,
                                           notifyParent: () => setState(() {}),
                                           typeOfTime: TypeOfTime.start,
                                         )),
@@ -240,6 +252,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         TimeBtmSheet(
+                                          templateData: templateData,
                                           notifyParent: () => setState(() {}),
                                           typeOfTime: TypeOfTime.finish,
                                         )),
@@ -279,13 +292,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
                             ),
                             const Spacer(),
                             CupertinoSwitch(
-                                value: context
-                                    .read<TemplateData>()
-                                    .notifications ??
-                                    false,
-                                onChanged: (value) => setState(() => context
-                                    .read<TemplateData>()
-                                    .notifications = value))
+                                value: templateData.notifications ?? false,
+                                onChanged: (value) => setState(
+                                    () => templateData.notifications = value))
                           ],
                         ),
                       ),
