@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 
 class TemplateData {
+  TemplateData(
+      {this.name,
+      this.note,
+      this.date,
+      this.endTime,
+      this.startTime,
+      this.notifications,
+      this.allDay,
+      this.color,
+      this.iconIndex});
+
   String? name;
   String? note;
   int? iconIndex;

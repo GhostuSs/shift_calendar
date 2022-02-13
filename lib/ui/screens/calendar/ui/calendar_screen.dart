@@ -24,6 +24,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Templates prov = context.read<Templates>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: ProjectColors.black,
@@ -45,10 +46,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       backgroundColor: ProjectColors.white,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             color: ProjectColors.black,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
@@ -58,7 +61,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        '(${context.read<Templates>().templates?.first.name} / ${formatTime(context.read<Templates>().templates?.first.startTime ?? const Duration(hours: 0, minutes: 0))} - ${formatTime(context.read<Templates>().templates?.first.endTime ?? const Duration(hours: 0, minutes: 0))})',
+                        prov.templates
+                                    ?.where((element) =>
+                                        element.date?.day == selectedDay.day &&
+                                        element.date?.month ==
+                                            selectedDay.month)
+                                    .isNotEmpty ==
+                                true
+                            ? '(${prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0))} - ${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0))})'
+                            : '',
                         style: const TextStyle(
                             color: ProjectColors.white,
                             overflow: TextOverflow.ellipsis),
@@ -66,13 +77,46 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  child: const Text(
-                    'give a receipt',
-                    style: TextStyle(color: ProjectColors.black, fontSize: 14),
-                  ),
-                )
+                Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: prov.templates!
+                                .where((element) =>
+                                    element.date?.day == selectedDay.day &&
+                                    element.date?.month == selectedDay.month)
+                                .isNotEmpty ==
+                            true
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 5),
+                            decoration: BoxDecoration(
+                                color: ProjectColors.white,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: RichText(
+                              text: TextSpan(
+                                style: const TextStyle(
+                                    color: ProjectColors.black,
+                                    fontFamily: 'sfprodisplay'),
+                                text: prov.templates!
+                                            .where((element) =>
+                                                element.date?.day ==
+                                                    selectedDay.day &&
+                                                element.date?.month ==
+                                                    selectedDay.month)
+                                            .isNotEmpty ==
+                                        true
+                                    ? prov.templates!
+                                        .firstWhere((element) =>
+                                            element.date?.day ==
+                                                selectedDay.day &&
+                                            element.date?.month ==
+                                                selectedDay.month)
+                                        .note
+                                    : '',
+                              ),
+                            ),
+                          )
+                        : Container()),
               ],
             ),
           ),
@@ -82,7 +126,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
               currentDay: selectedDay,
               onDaySelected: (DateTime selectDay, DateTime focusDay) {
                 setState(() {
-                  print(selectDay);
                   selectedDay = selectDay;
                 });
               },
@@ -95,7 +138,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
               firstDay: DateTime(DateTime.now().year - 1),
               lastDay: DateTime(DateTime.now().year + 1),
               eventLoader: (DateTime date) {
-                return [DateTime.now()];
+                List<DateTime> dates = List.empty(growable: true);
+                for (int i = 0; i < prov.templates!.length; i++) {
+                  if (!dates.contains(prov.templates![i].date) &&
+                      date.day == prov.templates![i].date?.day &&
+                      date.month == prov.templates![i].date?.month) {
+                    dates.add(prov.templates![i].date!);
+                  }
+                }
+                print(dates);
+                return dates;
               },
             ),
           ),
@@ -106,14 +158,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                for (int index = 0;
-                    index < context.read<Templates>().templates!.length;
-                    index++)
+                for (int index = 0; index < prov.templates!.length; index++)
                   Padding(
                     padding: const EdgeInsets.only(left: 7),
                     child: RawIcon(
                       size: 30,
-                      data: context.read<Templates>().templates![index],
+                      data: prov.templates![index],
                     ),
                   )
               ],

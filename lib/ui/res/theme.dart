@@ -24,7 +24,8 @@ abstract class AppTheme {
   );
   static CalendarStyle calendarStyle = CalendarStyle(
       markerDecoration: BoxDecoration(
-          color: Colors.red, borderRadius: BorderRadius.circular(2)),
+          color: ProjectColors.coralRed,
+          borderRadius: BorderRadius.circular(2)),
       cellAlignment: Alignment.topCenter,
       markerMargin: EdgeInsets.zero,
       cellMargin: EdgeInsets.zero,
