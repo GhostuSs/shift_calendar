@@ -61,10 +61,14 @@ class _DayTemplatesState extends State<DayTemplates> {
                         for (int index = 0;
                             index < prov.templates!.length;
                             index++)
-                          TemplatesCard(
-                            onPressed: () => onPressed(context, index),
-                            data: prov.templates![index],
-                          ),
+                          prov.templates![index].date?.day == widget.day.day &&
+                                  prov.templates![index].date?.month ==
+                                      widget.day.month
+                              ? TemplatesCard(
+                                  onPressed: () => onPressed(context, index),
+                                  data: prov.templates![index],
+                                )
+                              : Container(),
                       ],
                     ),
                   ],
