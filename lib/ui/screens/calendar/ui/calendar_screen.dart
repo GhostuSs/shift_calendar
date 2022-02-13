@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
-import 'package:shift_calendar/ui/screens/calendar/ui/descriptionD_of_day_screen.dart';
+import 'package:shift_calendar/ui/screens/calendar/ui/description_of_day_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../data/templates_data.dart';

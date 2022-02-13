@@ -65,6 +65,7 @@ class _DayTemplatesState extends State<DayTemplates> {
                                   prov.templates![index].date?.month ==
                                       widget.day.month
                               ? TemplatesCard(
+                            type: DescriptionType.time,
                                   onPressed: () => onPressed(context, index),
                                   data: prov.templates![index],
                                 )

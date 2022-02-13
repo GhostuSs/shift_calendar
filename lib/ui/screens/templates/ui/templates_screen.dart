@@ -59,6 +59,7 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
               children: [
                 for (int index = 0; index < prov.templates!.length; index++)
                   TemplatesCard(
+                    type: DescriptionType.note,
                     onPressed: () => onPressed(context, index),
                     data: prov.templates![index],
                   ),
