@@ -18,7 +18,6 @@ class CalendarScreen extends StatefulWidget {
   }
 }
 
-//TODO: Доделать
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDay = DateTime.now();
 
@@ -43,6 +42,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
       appBar: RawAppBar(
         height: MediaQuery.of(context).size.height,
         title: formatDate(),
+        selectedDay: selectedDay,
+        appBarType: Type.calendar,
       ),
       backgroundColor: ProjectColors.white,
       body: Column(
@@ -146,7 +147,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     dates.add(prov.templates![i].date!);
                   }
                 }
-                print(dates);
                 return dates;
               },
             ),

@@ -50,4 +50,10 @@ abstract class AppTypography {
     color: ProjectColors.lightGray,
     fontWeight: FontWeight.w700,
   );
+  static const TextStyle normal14White = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 14,
+    color: ProjectColors.lightGray,
+    fontWeight: FontWeight.w400,
+  );
 }

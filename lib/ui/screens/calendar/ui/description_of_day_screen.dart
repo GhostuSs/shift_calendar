@@ -77,7 +77,6 @@ class _DayTemplatesState extends State<DayTemplates> {
               ),
               Spacer(),
               Container(
-                height: 80,
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Row(
