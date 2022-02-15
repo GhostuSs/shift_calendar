@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shift_calendar/routes.dart';
 import 'package:shift_calendar/ui/res/theme.dart';
 
+import 'data/screen_resolution.dart';
 import 'data/templates_data.dart';
 import 'ui/res/colors/colors.dart';
 
@@ -16,7 +17,7 @@ Future<void> main() async {
   seen = prefs.getBool("seen") ?? false;
   await prefs.setBool("seen", true);
   subscribe = prefs.getBool("subscribe") ?? false;
-  //seen = false;
+  seen = false;
   runApp(const App());
 }
 
@@ -35,7 +36,7 @@ class _App extends State<App> {
     return MultiProvider(
       providers: [
         Provider<Templates>(create: (_) => Templates()),
-        //Provider<TemplateData>(create: (_) => TemplateData()),
+        Provider<Resolution>(create: (_) => Resolution()),
       ],
       child: MaterialApp(
           theme: AppTheme.theme,

@@ -51,16 +51,6 @@ class _TemplateScreenState extends State<TemplateScreen> {
           } else {
             context.read<Templates>().templates!.add(templateData);
           }
-          print(context.read<Templates>().templates?.first.name);
-          print(context.read<Templates>().templates?.first.note);
-          print(context.read<Templates>().templates?.first.iconIndex);
-          print(context.read<Templates>().templates?.first.color);
-          print(context.read<Templates>().templates?.first.allDay);
-          print(context.read<Templates>().templates?.first.startTime);
-          print(context.read<Templates>().templates?.first.endTime);
-          print(context.read<Templates>().templates?.first.date);
-          print(context.read<Templates>().templates?.first.notifications);
-
           widget.notifyParent();
           Navigator.pop(context);
         },

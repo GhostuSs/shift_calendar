@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/icon/raw_icon.dart';
 
+import '../../../../data/screen_resolution.dart';
 import '../../../../data/templates_data.dart';
 import '../../colors/colors.dart';
 
@@ -30,13 +31,14 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Resolution size = context.read<Resolution>();
     return Container(
       height: preferredSize.height,
       decoration: BoxDecoration(
           color: ProjectColors.black,
           border: Border.all(color: ProjectColors.black)),
       child: Padding(
-          padding: const EdgeInsets.only(bottom: 18),
+          padding: EdgeInsets.only(bottom: size.height! * 0.02),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -48,9 +50,9 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                           icon: const Icon(
                             Icons.arrow_back_ios,
                             color: ProjectColors.white,
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                        )
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                  )
                       : Container(),
                   Padding(
                     padding: const EdgeInsets.only(left: 16),
@@ -62,21 +64,21 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                   const Spacer(),
                   appBarType == Type.calendar
                       ? Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: distributor(context),
+                    mainAxisSize: MainAxisSize.min,
+                          children: distributor(context, size),
                         )
                       : Container(),
                   addBtn == true
                       ? Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: TextButton(
-                            child: const Text(
-                              'Save',
-                              style: AppTypography.normal16Gray,
-                            ),
-                            onPressed: onPressed ?? () => null,
-                          ),
-                        )
+                    padding: const EdgeInsets.only(right: 16),
+                    child: TextButton(
+                      child: const Text(
+                        'Save',
+                        style: AppTypography.normal16Gray,
+                      ),
+                      onPressed: onPressed ?? () => null,
+                    ),
+                  )
                       : Container()
                 ],
               )
@@ -85,7 +87,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  List<Widget> distributor(BuildContext context) {
+  List<Widget> distributor(BuildContext context, Resolution size) {
     final Templates prov = context.read<Templates>();
     List<Widget> data = [];
 
@@ -94,19 +96,20 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
           prov.templates![i].date?.month == selectedDay?.month) {
         if (data.length < 4) {
           data.add(Padding(
-            padding: const EdgeInsets.only(right: 5),
+            padding: EdgeInsets.only(right: size.height! * 0.0055),
             child: RawIcon(
-                size: 30, data: context.read<Templates>().templates![i]),
+                size: size.height! * 0.034,
+                data: context.read<Templates>().templates![i]),
           ));
         } else {
           data.add(Padding(
-              padding: const EdgeInsets.only(right: 5),
+              padding: EdgeInsets.only(right: size.height! * 0.0055),
               child: Container(
-                width: 32,
-                height: 32,
+                //width: size.height!*0.036,
+                //height: size.height!*0.036,
                 child: Center(
                   child: Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.all(size.height! * 0.005),
                       child: Text(
                         '+${prov.templates!.where((element) => element.date?.day == selectedDay?.day && element.date?.month == selectedDay?.month).length - 4}',
                         style: AppTypography.normal14White,
@@ -123,5 +126,5 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(height * 0.136);
+  Size get preferredSize => Size.fromHeight(height * 0.13);
 }

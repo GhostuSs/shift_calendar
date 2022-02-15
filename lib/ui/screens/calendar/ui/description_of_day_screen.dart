@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:shift_calendar/data/template_data.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
+import 'package:shift_calendar/ui/screens/templates/ui/description_template_screen.dart';
 import 'package:shift_calendar/ui/screens/templates/ui/uikit/templates_card.dart';
 
+import '../../../../data/screen_resolution.dart';
 import '../../../../data/templates_data.dart';
 import '../../../res/uikit/icon/raw_icon.dart';
 
@@ -30,6 +32,7 @@ class _DayTemplatesState extends State<DayTemplates> {
 
   @override
   Widget build(BuildContext context) {
+    final Resolution size = context.read<Resolution>();
     final Templates prov = context.read<Templates>();
     return Scaffold(
       appBar: RawAppBar(
@@ -37,23 +40,14 @@ class _DayTemplatesState extends State<DayTemplates> {
         title: formatDate(),
         backBtn: true,
       ),
-      floatingActionButton: context.read<Templates>().templates?.isEmpty == true
-          ? FloatingActionButton(
-              onPressed: () => print('pressed'),
-              backgroundColor: ProjectColors.black,
-              child: const Icon(
-                Icons.add,
-                color: ProjectColors.white,
-              ),
-            )
-          : Container(),
       backgroundColor: ProjectColors.white,
       body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: EdgeInsets.symmetric(
+              vertical: size.height! * 0.02, horizontal: size.height! * 0.01),
           child: Column(
             children: [
               Container(
-                height: 400,
+                height: size.height! * 0.45,
                 child: ListView(
                   children: [
                     Column(
@@ -66,9 +60,9 @@ class _DayTemplatesState extends State<DayTemplates> {
                                       widget.day.month
                               ? TemplatesCard(
                             type: DescriptionType.time,
-                                  onPressed: () => onPressed(context, index),
-                                  data: prov.templates![index],
-                                )
+                            onPressed: () => onPressed(context, index),
+                            data: prov.templates![index],
+                          )
                               : Container(),
                       ],
                     ),
@@ -78,29 +72,29 @@ class _DayTemplatesState extends State<DayTemplates> {
               Spacer(),
               Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     for (int index = 0;
-                        index < context.read<Templates>().templates!.length;
-                        index++)
+                    index < context.read<Templates>().templates!.length;
+                    index++)
                       (context.read<Templates>().templates![index].date?.day ==
-                                  widget.day.day &&
-                              context
-                                      .read<Templates>()
-                                      .templates![index]
-                                      .date
-                                      ?.month ==
-                                  widget.day.month)
+                          widget.day.day &&
+                          context
+                              .read<Templates>()
+                              .templates![index]
+                              .date
+                              ?.month ==
+                              widget.day.month)
                           ? Padding(
-                              padding: const EdgeInsets.only(left: 7),
-                              child: RawIcon(
-                                size: 30,
+                        padding: const EdgeInsets.only(left: 7),
+                        child: RawIcon(
+                          size: size.height! * 0.035,
                                 data:
                                     context.read<Templates>().templates![index],
                               ),
-                            )
+                      )
                           : Container()
                   ],
                 ),
@@ -177,6 +171,11 @@ class _DayTemplatesState extends State<DayTemplates> {
   }
 
   onPressed(BuildContext context, int index) {
-    print('pressed');
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => TemplateScreen(
+                data: context.read<Templates>().templates![index],
+                notifyParent: () => setState(() {}))));
   }
 }

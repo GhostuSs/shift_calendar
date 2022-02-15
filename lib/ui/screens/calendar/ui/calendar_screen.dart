@@ -5,6 +5,7 @@ import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
 import 'package:shift_calendar/ui/screens/calendar/ui/description_of_day_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../../data/screen_resolution.dart';
 import '../../../../data/templates_data.dart';
 import '../../../res/theme.dart';
 import '../../../res/uikit/icon/raw_icon.dart';
@@ -23,6 +24,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = context.read<Resolution>();
     final Templates prov = context.read<Templates>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -57,8 +59,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
               children: [
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 20,
+                    SizedBox(
+                      width: size.height! * 0.02,
                     ),
                     Expanded(
                       child: Text(
@@ -69,7 +71,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                             selectedDay.month)
                                     .isNotEmpty ==
                                 true
-                            ? '(${prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0))} - ${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0))})'
+                            ? '(${prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${prov.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0))} - ${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0))}'})'
                             : '',
                         style: const TextStyle(
                             color: ProjectColors.white,
@@ -79,8 +81,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ],
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height! * 0.01,
+                        horizontal: size.height! * 0.02),
                     child: prov.templates!
                                 .where((element) =>
                                     element.date?.day == selectedDay.day &&
@@ -92,21 +95,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 vertical: 4, horizontal: 5),
                             decoration: BoxDecoration(
                                 color: ProjectColors.white,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: RichText(
-                              text: TextSpan(
-                                style: const TextStyle(
-                                    color: ProjectColors.black,
-                                    fontFamily: 'sfprodisplay'),
-                                text: prov.templates!
-                                            .where((element) =>
-                                                element.date?.day ==
-                                                    selectedDay.day &&
-                                                element.date?.month ==
-                                                    selectedDay.month)
-                                            .isNotEmpty ==
-                                        true
-                                    ? prov.templates!
+                          borderRadius: BorderRadius.circular(5)),
+                      child: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                              color: ProjectColors.black,
+                              fontFamily: 'sfprodisplay'),
+                          text: prov.templates!
+                              .where((element) =>
+                          element.date?.day ==
+                              selectedDay.day &&
+                              element.date?.month ==
+                                  selectedDay.month)
+                              .isNotEmpty ==
+                              true
+                              ? prov.templates!
                                         .firstWhere((element) =>
                                             element.date?.day ==
                                                 selectedDay.day &&
@@ -117,7 +120,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               ),
                             ),
                           )
-                        : Container()),
+                        : Container(
+                            height: size.height! * 0.025,
+                          )),
               ],
             ),
           ),
@@ -133,9 +138,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
               calendarStyle: AppTheme.calendarStyle,
               headerVisible: false,
               startingDayOfWeek: StartingDayOfWeek.monday,
-              rowHeight: 88,
+              rowHeight: size.height! * 0.095,
               focusedDay: selectedDay,
-              daysOfWeekHeight: 30,
+              daysOfWeekHeight: size.height! * 0.025,
               firstDay: DateTime(DateTime.now().year - 1),
               lastDay: DateTime(DateTime.now().year + 1),
               eventLoader: (DateTime date) {
@@ -153,16 +158,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
           const Spacer(),
           Container(
-            height: 80,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            height: size.height! * 0.09,
+            padding: EdgeInsets.only(
+                bottom: size.height! * 0.01,
+                left: size.height! * 0.01,
+                right: size.height! * 0.01),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 for (int index = 0; index < prov.templates!.length; index++)
                   Padding(
-                    padding: const EdgeInsets.only(left: 7),
+                    padding: EdgeInsets.only(left: size.height! * 0.008),
                     child: RawIcon(
-                      size: 30,
+                      size: size.height! * 0.035,
                       data: prov.templates![index],
                     ),
                   )
