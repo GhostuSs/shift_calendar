@@ -5,6 +5,7 @@ import 'package:shift_calendar/ui/res/uikit/buttons/onboarding_btn.dart';
 import 'package:shift_calendar/ui/screens/onboarding/model/onboarding_model.dart';
 
 import '../../../../data/screen_resolution.dart';
+import '../../../res/colors/colors.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -21,12 +22,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<Resolution>().set(
-        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
-    print(context.read<Resolution>().width);
-    print(context.read<Resolution>().height);
     final Resolution size = context.read<Resolution>();
+    size.set(
+        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     return Scaffold(
+      backgroundColor: ProjectColors.darkGray,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         child: Column(
@@ -75,13 +75,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       body: PageView.builder(
           controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image:
-                    AssetImage(OnBoardingImages.dataList[currentIndex]),
-                    fit: BoxFit.cover)),
-          )),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image:
+                            AssetImage(OnBoardingImages.dataList[currentIndex]),
+                        fit: BoxFit.cover)),
+              )),
     );
   }
 }

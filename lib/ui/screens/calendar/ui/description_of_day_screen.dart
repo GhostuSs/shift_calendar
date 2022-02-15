@@ -175,6 +175,7 @@ class _DayTemplatesState extends State<DayTemplates> {
         context,
         MaterialPageRoute(
             builder: (BuildContext context) => TemplateScreen(
+                enableDeleting: Deleting.enabled,
                 data: context.read<Templates>().templates![index],
                 notifyParent: () => setState(() {}))));
   }

@@ -6,6 +6,7 @@ import 'package:shift_calendar/ui/screens/calendar/ui/description_of_day_screen.
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../data/screen_resolution.dart';
+import '../../../../data/template_data.dart';
 import '../../../../data/templates_data.dart';
 import '../../../res/theme.dart';
 import '../../../res/uikit/icon/raw_icon.dart';
@@ -21,10 +22,80 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDay = DateTime.now();
+  final List<TemplateData> initialData = [
+    TemplateData(
+        date: DateTime(2022, 2, 23, 00, 00),
+        startTime: const Duration(hours: 17, minutes: 30),
+        endTime: const Duration(hours: 21, minutes: 30),
+        name: 'Training',
+        note: 'Cardio training',
+        color: ProjectColors.coralRed,
+        iconIndex: 6),
+    TemplateData(
+        date: DateTime(2022, 2, 23, 00, 00),
+        startTime: const Duration(hours: 16, minutes: 30),
+        endTime: const Duration(hours: 20, minutes: 30),
+        name: 'KLM',
+        note: 'Flight',
+        color: ProjectColors.amber,
+        iconIndex: 4),
+    TemplateData(
+        date: DateTime(2022, 2, 23, 00, 00),
+        startTime: const Duration(hours: 17, minutes: 30),
+        endTime: const Duration(hours: 21, minutes: 30),
+        name: 'Build',
+        note: 'App',
+        color: ProjectColors.lightGreen,
+        iconIndex: 2),
+    TemplateData(
+        date: DateTime(2022, 2, 23, 00, 00),
+        startTime: const Duration(hours: 17, minutes: 30),
+        endTime: const Duration(hours: 21, minutes: 30),
+        name: 'Training',
+        note: 'Cardio training',
+        color: ProjectColors.darkGreen,
+        iconIndex: 8),
+    TemplateData(
+        date: DateTime(2022, 2, 23, 00, 00),
+        startTime: const Duration(hours: 17, minutes: 30),
+        endTime: const Duration(hours: 21, minutes: 30),
+        name: 'Train',
+        note: 'nope',
+        color: ProjectColors.lightBlue,
+        iconIndex: 9),
+    TemplateData(
+        date: DateTime(2022, 2, 7, 00, 00),
+        startTime: const Duration(hours: 10, minutes: 00),
+        endTime: const Duration(hours: 20, minutes: 10),
+        name: 'Conference',
+        note: 'In Sochi',
+        color: ProjectColors.lightGreen,
+        iconIndex: 8),
+    TemplateData(
+        date: DateTime(2022, 3, 8, 00, 00),
+        startTime: const Duration(hours: 00, minutes: 30),
+        endTime: const Duration(hours: 11, minutes: 0),
+        name: '8 March',
+        note: 'Send flowers',
+        allDay: true,
+        notifications: true,
+        color: ProjectColors.coralRed,
+        iconIndex: 7),
+  ];
+
+  @override
+  initState() {
+    if (context.read<Templates>().templates!.isEmpty == true) {
+      context.read<Templates>().templates!.addAll(initialData);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final size = context.read<Resolution>();
+    final Resolution size = context.read<Resolution>();
+    size.set(
+        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     final Templates prov = context.read<Templates>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
