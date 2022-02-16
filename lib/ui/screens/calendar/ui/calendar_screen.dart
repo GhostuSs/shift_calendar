@@ -6,7 +6,6 @@ import 'package:shift_calendar/ui/screens/calendar/ui/description_of_day_screen.
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../data/screen_resolution.dart';
-import '../../../../data/template_data.dart';
 import '../../../../data/templates_data.dart';
 import '../../../res/theme.dart';
 import '../../../res/uikit/icon/raw_icon.dart';
@@ -22,62 +21,60 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDay = DateTime.now();
-  final List<TemplateData> initialData = [
+  /*final List<TemplateData> initialData = [
     TemplateData(
-        date: DateTime(2022, 2, 23, 00, 00),
+        //date: DateTime(2022, 2, 23, 00, 00),
         startTime: const Duration(hours: 17, minutes: 30),
         endTime: const Duration(hours: 21, minutes: 30),
-        name: 'Training',
-        note: 'Cardio training',
+        name: 'Day work shift',
         color: ProjectColors.lightBlue,
         iconIndex: 0),
     TemplateData(
-        date: DateTime(2022, 2, 23, 00, 00),
+        //date: DateTime(2022, 2, 23, 00, 00),
         startTime: const Duration(hours: 16, minutes: 30),
         endTime: const Duration(hours: 20, minutes: 30),
-        name: 'KLM',
-        note: 'Flight',
+        name: 'Night work shift',
         color: ProjectColors.darkGray,
         iconIndex: 1),
     TemplateData(
-        date: DateTime(2022, 2, 23, 00, 00),
+       // date: DateTime(2022, 2, 23, 00, 00),
         startTime: const Duration(hours: 17, minutes: 30),
         endTime: const Duration(hours: 21, minutes: 30),
-        name: 'Build',
-        note: 'App',
-        color: ProjectColors.amber,
+        name: 'Weekend',
+        allDay: true,
+        color: ProjectColors.orange,
         iconIndex: 2),
     TemplateData(
-        date: DateTime(2022, 2, 23, 00, 00),
+        //date: DateTime(2022, 2, 23, 00, 00),
         startTime: const Duration(hours: 17, minutes: 30),
         endTime: const Duration(hours: 21, minutes: 30),
-        name: 'Training',
-        note: 'Cardio training',
+        name: 'Salary',
+        allDay: true,
         color: ProjectColors.darkGreen,
         iconIndex: 4),
     TemplateData(
-        date: DateTime(2022, 2, 23, 00, 00),
+        //date: DateTime(2022, 2, 23, 00, 00),
         startTime: const Duration(hours: 17, minutes: 30),
         endTime: const Duration(hours: 21, minutes: 30),
-        name: 'Train',
-        note: 'nope',
+        name: 'Sick leave',
+        allDay: true,
         color: ProjectColors.coralRed,
         iconIndex: 3),
     TemplateData(
-        date: DateTime(2022, 2, 7, 00, 00),
+        //date: DateTime(2022, 2, 7, 00, 00),
         startTime: const Duration(hours: 10, minutes: 00),
         endTime: const Duration(hours: 20, minutes: 10),
-        name: 'Conference',
-        note: 'In Sochi',
+        name: 'Important day',
+        allDay: true,
         color: ProjectColors.purple,
         iconIndex: 5),
-  ];
+  ];*/
 
   @override
   initState() {
-    if (context.read<Templates>().templates!.isEmpty == true) {
+    /* if (context.read<Templates>().templates!.isEmpty == true) {
       context.read<Templates>().templates!.addAll(initialData);
-    }
+    }*/
     super.initState();
   }
 
@@ -315,6 +312,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     retData = time.inMinutes % 60 < 10
         ? retData + ':0${time.inMinutes % 60}'
         : retData + ':${time.inMinutes % 60}';
+
     return retData;
   }
 }

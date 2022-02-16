@@ -47,15 +47,18 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   backBtn == true
                       ? IconButton(
+                          padding: EdgeInsets.zero,
                           icon: const Icon(
                             Icons.arrow_back_ios,
                             color: ProjectColors.white,
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                      : Container(),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      : Container(width: 47),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: addBtn == true
+                        ? const EdgeInsets.only(bottom: 0)
+                        : const EdgeInsets.only(bottom: 5),
                     child: Text(
                       title,
                       style: AppTypography.semibold32White,
@@ -64,7 +67,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                   const Spacer(),
                   appBarType == Type.calendar
                       ? Row(
-                    mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.min,
                           children: distributor(context, size),
                         )
                       : Container(),
@@ -74,8 +77,8 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: TextButton(
                       child: const Text(
                         'Save',
-                        style: AppTypography.normal16Gray,
-                      ),
+                              style: AppTypography.normal16systemBlue,
+                            ),
                       onPressed: onPressed ?? () => null,
                     ),
                   )

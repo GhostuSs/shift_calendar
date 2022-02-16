@@ -35,6 +35,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
   @override
   void initState() {
     templateData = widget.data ?? TemplateData();
+    templateData.color = widget.data?.color ?? ProjectColors.lightBlue;
     nameController.text = templateData.name ?? '';
     descController.text = templateData.note ?? '';
     super.initState();
@@ -45,17 +46,23 @@ class _TemplateScreenState extends State<TemplateScreen> {
     return Scaffold(
       appBar: RawAppBar(
         height: MediaQuery.of(context).size.height,
-        title: 'Template',
+        title: widget.enableDeleting == Deleting.enabled ? 'Shift' : 'Template',
         backBtn: true,
         addBtn: true,
         onPressed: () {
           final Templates prov = context.read<Templates>();
-          if (prov.templates!.contains(templateData)) {
+          if (prov.templates!
+              .where((element) => element.name == nameController.text)
+              .isEmpty) {
+            if (nameController.text.isNotEmpty == true) {
+              templateData.name = nameController.text;
+              context.read<Templates>().templates!.add(templateData);
+              widget.notifyParent();
+              Navigator.pop(context);
+            }
           } else {
-            context.read<Templates>().templates!.add(templateData);
+            print('contains');
           }
-          widget.notifyParent();
-          Navigator.pop(context);
         },
       ),
       body: ListView(
@@ -67,7 +74,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                 TextFormField(
                   controller: nameController,
                   decoration: const InputDecoration(hintText: 'Name'),
-                  onChanged: (value) => {templateData.name = value},
+                  onChanged: (value) => {value = nameController.text},
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),

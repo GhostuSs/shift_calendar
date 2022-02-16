@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shift_calendar/data/template_data.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/icon/raw_icon.dart';
@@ -45,23 +46,24 @@ class TemplatesCard extends StatelessWidget {
                       data: data,
                     ),
                   ),
-                  FittedBox(
-                    fit: BoxFit.contain,
+                  Flexible(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        RichText(
-                          overflow: TextOverflow.clip,
-                          text: TextSpan(
-                              text: data.name ?? '',
-                              style: AppTypography.normal14Black),
-                        ),
-                        Text(
-                          type == DescriptionType.note
-                              ? data.note ?? ''
-                              : '${formatTime(data.startTime!)} - ${formatTime(data.endTime!)}',
-                          style: AppTypography.normal10Black,
+                        Text('${data.name}',
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: AppTypography.normal14Black),
+                        Row(
+                          children: [
+                            Text(
+                              type == DescriptionType.note
+                                  ? data.note ?? ''
+                                  : checkAllDay(),
+                              style: AppTypography.normal10Black,
+                            )
+                          ],
                         )
                       ],
                     ),
@@ -78,6 +80,10 @@ class TemplatesCard extends StatelessWidget {
               )),
         ));
   }
+
+  String checkAllDay() => data.allDay == true
+      ? 'All day'
+      : '${formatTime(data.startTime!)} - ${formatTime(data.endTime!)}';
 
   String formatTime(Duration time) {
     String retData = '';

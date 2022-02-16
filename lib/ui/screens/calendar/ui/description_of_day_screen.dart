@@ -40,6 +40,19 @@ class _DayTemplatesState extends State<DayTemplates> {
         title: formatDate(),
         backBtn: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: ProjectColors.white,
+        ),
+        backgroundColor: ProjectColors.black,
+        onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => TemplateScreen(
+                    data: TemplateData(date: widget.day),
+                    notifyParent: () => setState(() {})))),
+      ),
       backgroundColor: ProjectColors.white,
       body: Padding(
           padding: EdgeInsets.symmetric(
