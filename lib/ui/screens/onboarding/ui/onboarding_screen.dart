@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/buttons/onboarding_btn.dart';
 import 'package:shift_calendar/ui/screens/onboarding/model/onboarding_model.dart';
+import 'package:shift_calendar/ui/screens/onboarding/ui/uikit/rating_dialog.dart';
 
 import '../../../../data/screen_resolution.dart';
 import '../../../res/colors/colors.dart';
@@ -36,7 +38,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               padding: EdgeInsets.only(bottom: size.height! * 0.05),
               child: OnboardingBtn(
                   label: 'Continue',
-                  onPressed: () {
+                  onPressed: () async {
+                    if (currentIndex == 1) {
+                      await showCupertinoDialog(
+                          context: context,
+                          builder: (BuildContext context) => const RateMyApp());
+                    }
                     if (currentIndex < OnBoardingImages.dataList.length - 1) {
                       currentIndex++;
                       pageController.animateToPage(currentIndex,
@@ -77,12 +84,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           controller: pageController,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image:
-                            AssetImage(OnBoardingImages.dataList[currentIndex]),
-                        fit: BoxFit.cover)),
-              )),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image:
+                    AssetImage(OnBoardingImages.dataList[currentIndex]),
+                    fit: BoxFit.cover)),
+          )),
     );
   }
 }

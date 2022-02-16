@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 
+import '../../../../data/screen_resolution.dart';
 import '../../../../data/template_data.dart';
 
 class ColorBtmSheet extends StatefulWidget {
@@ -19,15 +21,20 @@ class ColorBtmSheet extends StatefulWidget {
 class _ColorBtmSheetState extends State<ColorBtmSheet> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+    final Resolution size = context.read<Resolution>();
+    print(size.height);
+    print(size.width);
+    return SizedBox(
+      height: size.height! * 0.3,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+        padding: EdgeInsets.symmetric(
+            vertical: size.height! * 0.02, horizontal: size.width! * 0.035),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 20),
-              child: Text(
+            Padding(
+              padding: EdgeInsets.only(
+                  top: size.height! * 0.01, bottom: size.height! * 0.02),
+              child: const Text(
                 'Select color',
                 style: AppTypography.regular18Black,
               ),
@@ -37,86 +44,118 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: size.width! * 0.02),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(size.height! < 600
+                          ? size.height! * 0.038
+                          : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.backgroundGray),
                       child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! < 600
+                                ? size.height! * 0.038
+                                : size.height! * 0.033,
                         backgroundColor: widget.templateData.color ==
                                 ProjectColors.backgroundGray
                             ? ProjectColors.black
                             : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.backgroundGray,
                         ),
                       ),
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: size.width! * 0.02),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(size.height! < 600
+                        ? size.height! * 0.038
+                        : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.amber),
                     child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.amber
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
-                        child: const CircleAvatar(
-                          radius: 30,
+                        child: CircleAvatar(
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.amber,
                         )),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: size.width! * 0.024),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(size.height! < 600
+                        ? size.height! * 0.038
+                        : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.orange),
                     child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.orange
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.orange,
                         )),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: size.width! * 0.024),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(size.height! < 600
+                        ? size.height! * 0.038
+                        : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.coralRed),
                     child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.coralRed
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.coralRed,
                         )),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: size.width! * 0.024),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(size.height! < 600
+                        ? size.height! * 0.038
+                        : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.purple),
                     child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.purple
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.purple,
                         )),
                   ),
@@ -131,85 +170,115 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(size.height! < 600
+                          ? size.height! * 0.04
+                          : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.lightGreen),
                       child: CircleAvatar(
-                          radius: 32,
+                          radius: size.height! < 600
+                              ? size.height! * 0.04
+                              : size.height! * 0.033,
                           backgroundColor: widget.templateData.color ==
                                   ProjectColors.lightGreen
                               ? ProjectColors.black
                               : ProjectColors.lightGray,
                           child: CircleAvatar(
-                            radius: 30,
+                            radius: size.height! < 600
+                                ? size.height! * 0.038
+                                : size.height! * 0.033,
                             backgroundColor: ProjectColors.lightGreen,
                           )),
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(size.height! < 600
+                          ? size.height! * 0.038
+                          : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.darkGreen),
                       child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.darkGreen
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.darkGreen,
                         ),
                       ),
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(size.height! < 600
+                          ? size.height! * 0.038
+                          : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.lightBlue),
                       child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.04
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.lightBlue
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.lightBlue,
                         ),
                       ),
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: CircleAvatar(
-                      radius: 32,
+                      radius: size.height! < 600
+                          ? size.height! * 0.04
+                          : size.height! * 0.033,
                       backgroundColor:
                           widget.templateData.color == ProjectColors.darkBlue
                               ? ProjectColors.black
                               : ProjectColors.lightGray,
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(32),
+                        borderRadius: BorderRadius.circular(size.height! < 600
+                            ? size.height! * 0.038
+                            : size.height! * 0.033),
                         onTap: () => _onTap(ProjectColors.darkBlue),
                         child: CircleAvatar(
-                          radius: 30,
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.darkBlue,
                         ),
                       ),
                     )),
                 Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(size.height! < 600
+                          ? size.height! * 0.04
+                          : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.black),
                       child: CircleAvatar(
-                        radius: 32,
+                        radius: size.height! < 600
+                            ? size.height! * 0.038
+                            : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.black
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
-                        child: const CircleAvatar(
-                          radius: 30,
+                        child: CircleAvatar(
+                          radius: size.height! < 600
+                              ? size.height! * 0.038
+                              : size.height! * 0.033,
                           backgroundColor: ProjectColors.darkGray,
                         ),
                       ),

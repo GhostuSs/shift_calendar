@@ -45,18 +45,26 @@ class TemplatesCard extends StatelessWidget {
                       data: data,
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(data.name ?? '', style: AppTypography.normal14Black),
-                      Text(
-                        type == DescriptionType.note
-                            ? data.note ?? ''
-                            : '${formatTime(data.startTime!)} - ${formatTime(data.endTime!)}',
-                        style: AppTypography.normal10Black,
-                      )
-                    ],
+                  FittedBox(
+                    fit: BoxFit.contain,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                          overflow: TextOverflow.clip,
+                          text: TextSpan(
+                              text: data.name ?? '',
+                              style: AppTypography.normal14Black),
+                        ),
+                        Text(
+                          type == DescriptionType.note
+                              ? data.note ?? ''
+                              : '${formatTime(data.startTime!)} - ${formatTime(data.endTime!)}',
+                          style: AppTypography.normal10Black,
+                        )
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   const Padding(
