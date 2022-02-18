@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
@@ -31,7 +32,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     print(size.height);
     return Scaffold(
-      backgroundColor: ProjectColors.darkGray,
+      backgroundColor: Color(0xFF151515),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         child: Column(
@@ -116,9 +117,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           itemBuilder: (context, index) => Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image:
-                    AssetImage(OnBoardingImages.dataList[currentIndex]),
-                    fit: BoxFit.cover)),
+                    image: Svg(OnBoardingImages.dataList[currentIndex],
+                            scale: 6.0),
+                        fit: BoxFit.cover)),
           )),
     );
   }

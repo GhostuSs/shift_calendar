@@ -18,7 +18,7 @@ class OnboardingBtn extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: size.width! * 0.1),
         child: Container(
           child: InkWell(
-            borderRadius: BorderRadius.circular(size.height! < 600
+            borderRadius: BorderRadius.circular(size.height! < 800
                 ? size.height! * 0.0425
                 : size.height! * 0.03125),
             onTap: onPressed,
@@ -28,7 +28,7 @@ class OnboardingBtn extends StatelessWidget {
                   ? size.height! * 0.085
                   : size.height! * 0.0625,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(size.height! < 600
+                  borderRadius: BorderRadius.circular(size.height! < 800
                       ? size.height! * 0.0425
                       : size.height! * 0.03125),
                   color: ProjectColors.white),
