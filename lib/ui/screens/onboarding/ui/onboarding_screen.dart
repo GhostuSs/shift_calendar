@@ -117,8 +117,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           itemBuilder: (context, index) => Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: Svg(OnBoardingImages.dataList[currentIndex],
-                            scale: 6.0),
+                        filterQuality: FilterQuality.high,
+                        image: Svg(
+                          OnBoardingImages.dataList[currentIndex],
+                          scale: 6.0,
+                          source: SvgSource.asset,
+                        ),
                         fit: BoxFit.cover)),
           )),
     );
