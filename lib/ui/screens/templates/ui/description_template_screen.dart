@@ -325,8 +325,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                   context: context,
                                   builder: (BuildContext context) =>
                                       CupertinoAlertDialog(
-                                        title: Text('Delete shift?'),
-                                        content: Text(
+                                        title: const Text('Delete shift?'),
+                                        content: const Text(
                                             'Are you sure you want to delete the shift?'),
                                         actions: [
                                           CupertinoDialogAction(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:shift_calendar/data/template_data.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/icon/raw_icon.dart';
 
+import '../../../../../data/screen_resolution.dart';
 import '../../../../res/colors/colors.dart';
+
 enum DescriptionType { time, note }
 
 class TemplatesCard extends StatelessWidget {
@@ -21,14 +24,17 @@ class TemplatesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
+    final Resolution size = context.read<Resolution>();
     return Padding(
-        padding: EdgeInsets.only(bottom: height * 0.01, left: 10, right: 10),
+        padding: EdgeInsets.only(
+            bottom: size.height! * 0.01,
+            left: size.width! * 0.02,
+            right: size.width! * 0.02),
         child: InkWell(
           onTap: onPressed,
           borderRadius: BorderRadius.circular(5),
           child: Container(
-              height: 64,
+              height: size.height! * 0.07,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
@@ -37,12 +43,12 @@ class TemplatesCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                        left: 20,
-                        right: 15,
-                        top: height * 0.01,
-                        bottom: height * 0.01),
+                        left: size.height! * 0.035,
+                        right: size.height! * 0.035,
+                        top: size.height! * 0.01,
+                        bottom: size.height! * 0.01),
                     child: RawIcon(
-                      size: 40,
+                      size: size.height! * 0.04,
                       data: data,
                     ),
                   ),
@@ -69,11 +75,11 @@ class TemplatesCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const Padding(
-                      padding: EdgeInsets.only(right: 15),
+                  Padding(
+                      padding: EdgeInsets.only(right: size.height! * 0.016),
                       child: Icon(
                         Icons.arrow_forward_ios,
-                        size: 18,
+                        size: size.height! * 0.02,
                         color: ProjectColors.black,
                       ))
                 ],

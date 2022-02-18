@@ -88,11 +88,12 @@ class _DayTemplatesState extends State<DayTemplates> {
               ),
               const Spacer(),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     border: Border(
                         top: BorderSide(color: ProjectColors.backgroundGray))),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding: EdgeInsets.symmetric(
+                    vertical: size.height! * 0.01,
+                    horizontal: size.width! * 0.02),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -102,8 +103,8 @@ class _DayTemplatesState extends State<DayTemplates> {
                       (context.read<Templates>().templates![index].date?.day ==
                                   widget.day.day &&
                               context
-                              .read<Templates>()
-                              .templates![index]
+                                      .read<Templates>()
+                                      .templates![index]
                               .date
                               ?.month ==
                               widget.day.month)
