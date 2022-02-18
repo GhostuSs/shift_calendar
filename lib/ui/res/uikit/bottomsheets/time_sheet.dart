@@ -68,7 +68,7 @@ class _TimeBtmSheetState extends State<TimeBtmSheet> {
                 Expanded(
                   child: CupertinoPicker(
                       looping: true,
-                      scrollController: new FixedExtentScrollController(
+                      scrollController: FixedExtentScrollController(
                         initialItem: _selectedHour,
                       ),
                       itemExtent: 35.0,

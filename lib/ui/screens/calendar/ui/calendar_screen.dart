@@ -218,7 +218,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
           const Spacer(),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 border: Border(
                     top: BorderSide(color: ProjectColors.backgroundGray))),
             height: size.height! * 0.09,
@@ -229,7 +229,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                for (int index = 0; index < 9; index++)
+                for (int index = 0;
+                    index < data.templates!.length && index < 6;
+                    index++)
                   Padding(
                     padding: EdgeInsets.only(left: size.height! * 0.008),
                     child: RawIcon(
@@ -237,7 +239,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       data: data.templates![index],
                     ),
                   ),
-                data.templates!.length > 9
+                data.templates!.length > 5
                     ? Padding(
                         padding: EdgeInsets.only(left: size.height! * 0.0055),
                         child: Container(
@@ -247,7 +249,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             child: Padding(
                                 padding: EdgeInsets.all(size.height! * 0.005),
                                 child: Text(
-                                  '+${data.templates!.length - 9}',
+                                  '+${data.templates!.length - 6}',
                                   style: TextStyle(
                                       fontFamily: 'sfprodisplay',
                                       fontSize: size.height! * 0.015,

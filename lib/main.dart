@@ -18,6 +18,7 @@ Future<void> main() async {
   seen = prefs.getBool("seen") ?? false;
   subscribe = prefs.getBool("subscrube") ?? false;
   await prefs.setBool("seen", true);
+  seen = false;
   runApp(const App());
 }
 
