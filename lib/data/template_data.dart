@@ -11,13 +11,15 @@ class TemplateData {
       this.notifications,
       this.allDay,
       this.color,
-      this.iconIndex});
+      this.iconIndex,
+      this.amPm});
 
   String? name;
   String? note;
   int? iconIndex;
   Color? color;
   DateTime? date;
+  int? amPm;
   Duration? startTime;
   Duration? endTime;
   bool? allDay;

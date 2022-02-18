@@ -7,6 +7,7 @@ import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/appbars/raw_appbar.dart';
 import 'package:shift_calendar/ui/res/uikit/bottomsheets/color_btm_sheet.dart';
 import 'package:shift_calendar/ui/res/uikit/bottomsheets/time_sheet.dart';
+import 'package:shift_calendar/ui/screens/main_page.dart';
 
 import '../../../../data/templates_data.dart';
 import '../../../res/colors/colors.dart';
@@ -212,8 +213,10 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                   style: AppTypography.normal14Black,
                                 ),
                                 const Spacer(),
-                                Text(formatTime(templateData.startTime ??
-                                    const Duration(hours: 0, seconds: 0))),
+                                Text(formatTime(
+                                    templateData.startTime ??
+                                        const Duration(hours: 0, seconds: 0),
+                                    templateData.amPm ?? 0)),
                                 IconButton(
                                     splashRadius: 1.0,
                                     iconSize: 10,
@@ -248,8 +251,10 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                   style: AppTypography.normal14Black,
                                 ),
                                 const Spacer(),
-                                Text(formatTime(templateData.endTime ??
-                                    const Duration(hours: 0, seconds: 0))),
+                                Text(formatTime(
+                                    templateData.endTime ??
+                                        const Duration(hours: 0, seconds: 0),
+                                    templateData.amPm ?? 0)),
                                 IconButton(
                                     splashRadius: 1.0,
                                     iconSize: 10,
@@ -337,11 +342,22 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                             ),
                                             isDefaultAction: true,
                                             onPressed: () {
-                                              context
+                                              if (context
                                                   .read<Templates>()
                                                   .templates!
-                                                  .remove(templateData);
-                                              Navigator.pop(context);
+                                                  .contains(templateData)) {
+                                                Navigator.pop(context);
+                                                context
+                                                    .read<Templates>()
+                                                    .templates!
+                                                    .remove(templateData);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const MainPage()));
+                                              }
                                             },
                                           )
                                         ],
@@ -417,12 +433,15 @@ class _TemplateScreenState extends State<TemplateScreen> {
     }
   }
 
-  String formatTime(Duration time) {
+  String formatTime(Duration time, int amPm) {
     String retData = '';
-    retData = time.inHours < 10 ? '0${time.inHours}' : '${time.inHours}';
+    retData = time.inHours % 12 < 10
+        ? '0${time.inHours % 12}'
+        : '${time.inHours % 12}';
     retData = time.inMinutes % 60 < 10
         ? retData + ':0${time.inMinutes % 60}'
         : retData + ':${time.inMinutes % 60}';
+    retData = amPm == 1 ? retData + ' PM' : retData + ' AM';
     return retData;
   }
 }

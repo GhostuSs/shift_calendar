@@ -34,22 +34,6 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
         height: MediaQuery.of(context).size.height,
         title: 'Templates',
       ),
-      floatingActionButton: context.read<Templates>().templates?.isEmpty == true
-          ? FloatingActionButton(
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => TemplateScreen(
-                            data: _initialTemplateData,
-                            notifyParent: () => setState(() {}),
-                          ))),
-              backgroundColor: ProjectColors.black,
-              child: const Icon(
-                Icons.add,
-                color: ProjectColors.white,
-              ),
-            )
-          : Container(),
       backgroundColor: ProjectColors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),

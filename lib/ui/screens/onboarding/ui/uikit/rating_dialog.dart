@@ -83,7 +83,7 @@ class RateMyApp extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      '   Cancel',
+                      '    Cancel',
                       style: _textStyle,
                     )),
                 Container(
@@ -96,7 +96,7 @@ class RateMyApp extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      'Submit   ',
+                      'Submit    ',
                       style: _textStyle,
                     ))
               ],

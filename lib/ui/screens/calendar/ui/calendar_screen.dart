@@ -21,12 +21,16 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDay = DateTime.now();
-  /*final List<TemplateData> initialData = [
+  late Templates data;
+
+  /*
+  final List<TemplateData> initialData = [
     TemplateData(
         //date: DateTime(2022, 2, 23, 00, 00),
         startTime: const Duration(hours: 17, minutes: 30),
         endTime: const Duration(hours: 21, minutes: 30),
         name: 'Day work shift',
+        amPm: 1,
         color: ProjectColors.lightBlue,
         iconIndex: 0),
     TemplateData(
@@ -72,9 +76,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   initState() {
-    /* if (context.read<Templates>().templates!.isEmpty == true) {
-      context.read<Templates>().templates!.addAll(initialData);
-    }*/
+    if (context.read<Templates>().templates!.isEmpty == true) {
+      //context.read<Templates>().templates!.addAll(initialData);
+    }
+    data = context.read<Templates>();
     super.initState();
   }
 
@@ -83,7 +88,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final Resolution size = context.read<Resolution>();
     size.set(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
-    final Templates prov = context.read<Templates>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: ProjectColors.black,
@@ -91,8 +95,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      DayTemplates(day: selectedDay)));
+                  builder: (BuildContext context) => DayTemplates(
+                      day: selectedDay, notifyParent: () => setState(() {}))));
         },
         child: const Icon(
           Icons.edit,
@@ -122,14 +126,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        prov.templates
+                        data.templates
                                     ?.where((element) =>
                                         element.date?.day == selectedDay.day &&
                                         element.date?.month ==
                                             selectedDay.month)
                                     .isNotEmpty ==
                                 true
-                            ? '(${prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${prov.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0))} - ${formatTime(prov.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0))}'})'
+                            ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)}'})'
                             : '',
                         style: const TextStyle(
                             color: ProjectColors.white,
@@ -142,7 +146,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     padding: EdgeInsets.symmetric(
                         vertical: size.height! * 0.01,
                         horizontal: size.height! * 0.02),
-                    child: prov.templates!
+                    child: data.templates!
                                 .where((element) =>
                                     element.date?.day == selectedDay.day &&
                                     element.date?.month == selectedDay.month)
@@ -153,21 +157,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 vertical: 4, horizontal: 5),
                             decoration: BoxDecoration(
                                 color: ProjectColors.white,
-                          borderRadius: BorderRadius.circular(5)),
+                                borderRadius: BorderRadius.circular(5)),
                       child: RichText(
                         text: TextSpan(
                           style: const TextStyle(
                               color: ProjectColors.black,
                               fontFamily: 'sfprodisplay'),
-                          text: prov.templates!
-                              .where((element) =>
-                          element.date?.day ==
-                              selectedDay.day &&
-                              element.date?.month ==
-                                  selectedDay.month)
-                              .isNotEmpty ==
-                              true
-                              ? prov.templates!
+                          text: data.templates!
+                                            .where((element) =>
+                                                element.date?.day ==
+                                                    selectedDay.day &&
+                                                element.date?.month ==
+                                                    selectedDay.month)
+                                            .isNotEmpty ==
+                                        true
+                                    ? data.templates!
                                         .firstWhere((element) =>
                                             element.date?.day ==
                                                 selectedDay.day &&
@@ -203,11 +207,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
               lastDay: DateTime(DateTime.now().year + 1),
               eventLoader: (DateTime date) {
                 List<DateTime> dates = List.empty(growable: true);
-                for (int i = 0; i < prov.templates!.length; i++) {
-                  if (!dates.contains(prov.templates![i].date) &&
-                      date.day == prov.templates![i].date?.day &&
-                      date.month == prov.templates![i].date?.month) {
-                    dates.add(prov.templates![i].date!);
+                for (int i = 0; i < data.templates!.length; i++) {
+                  if (!dates.contains(data.templates![i].date) &&
+                      date.day == data.templates![i].date?.day &&
+                      date.month == data.templates![i].date?.month) {
+                    dates.add(data.templates![i].date!);
                   }
                 }
                 return dates;
@@ -216,6 +220,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
           const Spacer(),
           Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    top: BorderSide(color: ProjectColors.backgroundGray))),
             height: size.height! * 0.09,
             padding: EdgeInsets.only(
                 bottom: size.height! * 0.01,
@@ -224,12 +231,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                for (int index = 0; index < prov.templates!.length; index++)
+                for (int index = 0; index < data.templates!.length; index++)
                   Padding(
                     padding: EdgeInsets.only(left: size.height! * 0.008),
                     child: RawIcon(
                       size: size.height! * 0.035,
-                      data: prov.templates![index],
+                      data: data.templates![index],
                     ),
                   )
               ],
@@ -306,13 +313,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
     }
   }
 
-  String formatTime(Duration time) {
+  String formatTime(Duration time, int amPm) {
     String retData = '';
-    retData = time.inHours < 10 ? '0${time.inHours}' : '${time.inHours}';
+    retData =
+        time.inHours < 10 ? '0${time.inHours % 12}' : '${time.inHours % 12}';
     retData = time.inMinutes % 60 < 10
         ? retData + ':0${time.inMinutes % 60}'
         : retData + ':${time.inMinutes % 60}';
-
+    retData = amPm == 1 ? retData + ' PM' : retData + ' AM';
     return retData;
   }
 }

@@ -12,8 +12,10 @@ import '../../../res/uikit/icon/raw_icon.dart';
 
 class DayTemplates extends StatefulWidget {
   final DateTime day;
+  final VoidCallback notifyParent;
 
-  const DayTemplates({Key? key, required this.day}) : super(key: key);
+  const DayTemplates({Key? key, required this.day, required this.notifyParent})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -41,7 +43,7 @@ class _DayTemplatesState extends State<DayTemplates> {
         backBtn: true,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: ProjectColors.white,
         ),
@@ -51,7 +53,9 @@ class _DayTemplatesState extends State<DayTemplates> {
             MaterialPageRoute(
                 builder: (BuildContext context) => TemplateScreen(
                     data: TemplateData(date: widget.day),
-                    notifyParent: () => setState(() {})))),
+                    notifyParent: () => setState(() {
+                          widget.notifyParent();
+                        })))),
       ),
       backgroundColor: ProjectColors.white,
       body: Padding(
@@ -72,29 +76,32 @@ class _DayTemplatesState extends State<DayTemplates> {
                                   prov.templates![index].date?.month ==
                                       widget.day.month
                               ? TemplatesCard(
-                            type: DescriptionType.time,
-                            onPressed: () => onPressed(context, index),
-                            data: prov.templates![index],
-                          )
+                                  type: DescriptionType.time,
+                                  onPressed: () => onPressed(context, index),
+                                  data: prov.templates![index],
+                                )
                               : Container(),
                       ],
                     ),
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Container(
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(color: ProjectColors.backgroundGray))),
                 padding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     for (int index = 0;
-                    index < context.read<Templates>().templates!.length;
-                    index++)
+                        index < context.read<Templates>().templates!.length;
+                        index++)
                       (context.read<Templates>().templates![index].date?.day ==
-                          widget.day.day &&
-                          context
+                                  widget.day.day &&
+                              context
                               .read<Templates>()
                               .templates![index]
                               .date
@@ -104,9 +111,9 @@ class _DayTemplatesState extends State<DayTemplates> {
                         padding: const EdgeInsets.only(left: 7),
                         child: RawIcon(
                           size: size.height! * 0.035,
-                                data:
-                                    context.read<Templates>().templates![index],
-                              ),
+                          data:
+                          context.read<Templates>().templates![index],
+                        ),
                       )
                           : Container()
                   ],
@@ -189,7 +196,7 @@ class _DayTemplatesState extends State<DayTemplates> {
         MaterialPageRoute(
             builder: (BuildContext context) => TemplateScreen(
                 enableDeleting: Deleting.enabled,
-                data: context.read<Templates>().templates![index],
+                data: context.read<Templates>().templates?[index],
                 notifyParent: () => setState(() {}))));
   }
 }

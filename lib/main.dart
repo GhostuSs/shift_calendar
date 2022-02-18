@@ -10,13 +10,14 @@ import 'ui/res/colors/colors.dart';
 
 bool seen = false;
 bool subscribe = false;
+bool bottomAppbar = true;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   seen = prefs.getBool("seen") ?? false;
+  subscribe = prefs.getBool("subscrube") ?? false;
   await prefs.setBool("seen", true);
-  seen = false;
   runApp(const App());
 }
 
