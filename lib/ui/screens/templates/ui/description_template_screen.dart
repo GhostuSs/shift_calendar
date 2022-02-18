@@ -216,7 +216,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                 Text(formatTime(
                                     templateData.startTime ??
                                         const Duration(hours: 0, seconds: 0),
-                                    templateData.amPm ?? 0)),
+                                    templateData.amPmStart ?? 0)),
                                 IconButton(
                                     splashRadius: 1.0,
                                     iconSize: 10,
@@ -254,7 +254,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                 Text(formatTime(
                                     templateData.endTime ??
                                         const Duration(hours: 0, seconds: 0),
-                                    templateData.amPm ?? 0)),
+                                    templateData.amPmEnd ?? 0)),
                                 IconButton(
                                     splashRadius: 1.0,
                                     iconSize: 10,

@@ -12,14 +12,16 @@ class TemplateData {
       this.allDay,
       this.color,
       this.iconIndex,
-      this.amPm});
+      this.amPmStart,
+      this.amPmEnd});
 
   String? name;
   String? note;
   int? iconIndex;
   Color? color;
   DateTime? date;
-  int? amPm;
+  int? amPmStart;
+  int? amPmEnd;
   Duration? startTime;
   Duration? endTime;
   bool? allDay;

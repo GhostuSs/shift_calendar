@@ -89,7 +89,7 @@ class TemplatesCard extends StatelessWidget {
 
   String checkAllDay() => data.allDay == true
       ? 'All day'
-      : '${formatTime(data.startTime ?? const Duration(hours: 0, minutes: 0), data.amPm ?? 0)} - ${formatTime(data.endTime ?? const Duration(hours: 0, minutes: 0), data.amPm ?? 0)}';
+      : '${formatTime(data.startTime ?? const Duration(hours: 0, minutes: 0), data.amPmStart ?? 0)} - ${formatTime(data.endTime ?? const Duration(hours: 0, minutes: 0), data.amPmEnd ?? 0)}';
 
   String formatTime(Duration time, int amPm) {
     String retData = '';

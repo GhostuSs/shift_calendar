@@ -42,11 +42,13 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
             Column(
               children: [
                 for (int index = 0; index < prov.templates!.length; index++)
-                  TemplatesCard(
-                    type: DescriptionType.time,
-                    onPressed: () => onPressed(context, index),
-                    data: prov.templates![index],
-                  ),
+                  prov.templates![index].date == null
+                      ? TemplatesCard(
+                          type: DescriptionType.time,
+                          onPressed: () => onPressed(context, index),
+                          data: prov.templates![index],
+                        )
+                      : Container()
               ],
             )
           ],

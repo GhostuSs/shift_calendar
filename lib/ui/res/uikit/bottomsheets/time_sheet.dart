@@ -35,12 +35,14 @@ class _TimeBtmSheetState extends State<TimeBtmSheet> {
     widget.templateData.startTime ??= const Duration(hours: 0, minutes: 0);
     widget.templateData.endTime ??= const Duration(hours: 0, minutes: 0);
     widget.typeOfTime == TypeOfTime.start
-        ? _selectedHour = widget.templateData.startTime!.inHours % 12
-        : _selectedHour = widget.templateData.endTime!.inHours % 12;
+        ? _selectedHour = widget.templateData.startTime!.inHours % 12 - 1
+        : _selectedHour = widget.templateData.endTime!.inHours % 12 - 1;
     widget.typeOfTime == TypeOfTime.start
         ? _selectedMinute = widget.templateData.startTime!.inMinutes % 60
         : _selectedHour = widget.templateData.endTime!.inMinutes % 60;
-    _amPm = widget.templateData.amPm ?? 0;
+    widget.typeOfTime == TypeOfTime.start
+        ? _amPm = widget.templateData.amPmStart ?? 0
+        : _amPm = widget.templateData.amPmEnd ?? 0;
 
     super.initState();
   }
@@ -74,11 +76,11 @@ class _TimeBtmSheetState extends State<TimeBtmSheet> {
                       itemExtent: 35.0,
                       backgroundColor: Colors.white,
                       onSelectedItemChanged: (int index) {
-                        _selectedHour = index;
+                        _selectedHour = index + 1;
                         widget.typeOfTime == TypeOfTime.start
                             ? widget.templateData.startTime = Duration(
                                 hours: _selectedHour, minutes: _selectedMinute)
-                            : widget.templateData.startTime = Duration(
+                            : widget.templateData.endTime = Duration(
                                 hours: _selectedHour, minutes: _selectedMinute);
                         widget.notifyParent();
                       },
@@ -103,7 +105,7 @@ class _TimeBtmSheetState extends State<TimeBtmSheet> {
                               ? widget.templateData.startTime = Duration(
                                   hours: _selectedHour,
                                   minutes: _selectedMinute)
-                              : widget.templateData.startTime = Duration(
+                              : widget.templateData.endTime = Duration(
                                   hours: _selectedHour,
                                   minutes: _selectedMinute);
                           widget.notifyParent();
@@ -125,6 +127,10 @@ class _TimeBtmSheetState extends State<TimeBtmSheet> {
                       onSelectedItemChanged: (int index) {
                         setState(() {
                           _amPm = index;
+                          widget.typeOfTime == TypeOfTime.start
+                              ? widget.templateData.amPmStart = _amPm
+                              : widget.templateData.amPmEnd = _amPm;
+                          widget.notifyParent();
                         });
                       },
                       children: List<Widget>.generate(2, (int index) {

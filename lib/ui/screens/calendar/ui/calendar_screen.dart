@@ -30,7 +30,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         startTime: const Duration(hours: 17, minutes: 30),
         endTime: const Duration(hours: 21, minutes: 30),
         name: 'Day work shift',
-        amPm: 1,
+        amPmStart: 0,
+        amPmEnd: 1,
         color: ProjectColors.lightBlue,
         iconIndex: 0),
     TemplateData(
@@ -125,14 +126,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       width: size.height! * 0.02,
                       child: Text(
                         data.templates
-                                    ?.where((element) =>
+                                      ?.where((element) =>
                                           element.date?.day ==
                                               selectedDay.day &&
                                           element.date?.month ==
                                               selectedDay.month)
                                       .isNotEmpty ==
                                   true
-                              ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)}'})'
+                              ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmStart ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmEnd ?? 0)}'})'
                               : '',
                           style: const TextStyle(
                               color: ProjectColors.white,
@@ -239,7 +240,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       data: data.templates![index],
                     ),
                   ),
-                data.templates!.length > 5
+                data.templates!.length > 5 && data.templates!.length - 6 != 0
                     ? Padding(
                         padding: EdgeInsets.only(left: size.height! * 0.0055),
                         child: Container(

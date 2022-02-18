@@ -69,6 +69,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.setBool('subscribe', true);
+                        prefs.setBool("seen", true);
                         subscribe = true;
                       }
                     }
@@ -79,6 +80,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.linear);
                     } else {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setBool("seen", true);
                       Navigator.pushNamed(context, '/');
                     }
                   }),
