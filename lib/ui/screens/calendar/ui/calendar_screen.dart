@@ -39,6 +39,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         startTime: const Duration(hours: 16, minutes: 30),
         endTime: const Duration(hours: 20, minutes: 30),
         name: 'Night work shift',
+        amPmStart: 1,
+        amPmEnd: 0,
         color: ProjectColors.darkGray,
         iconIndex: 1),
     TemplateData(
@@ -122,23 +124,23 @@ class _CalendarScreenState extends State<CalendarScreen> {
               children: [
                 Row(
                   children: [
-                    SizedBox(
-                      width: size.height! * 0.02,
+                    Expanded(
                       child: Text(
                         data.templates
-                                      ?.where((element) =>
-                                          element.date?.day ==
-                                              selectedDay.day &&
-                                          element.date?.month ==
-                                              selectedDay.month)
-                                      .isNotEmpty ==
-                                  true
-                              ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmStart ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmEnd ?? 0)}'})'
-                              : '',
-                          style: const TextStyle(
-                              color: ProjectColors.white,
-                              overflow: TextOverflow.ellipsis),
-                        )),
+                                    ?.where((element) =>
+                                        element.date?.day == selectedDay.day &&
+                                        element.date?.month ==
+                                            selectedDay.month)
+                                    .isNotEmpty ==
+                                true
+                            ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmStart ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmEnd ?? 0)}'})'
+                            : '',
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            color: ProjectColors.white,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ),
                   ],
                 ),
                 Padding(

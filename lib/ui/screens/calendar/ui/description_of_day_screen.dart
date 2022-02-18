@@ -116,7 +116,9 @@ class _DayTemplatesState extends State<DayTemplates> {
                                     context.read<Templates>().templates![index],
                               ),
                             )
-                          : Container(),
+                          : Container(
+                              height: size.height! * 0.035,
+                            ),
 /*
                     context.read<Templates>().templates!.where((element) => element.date?.day==widget.day.day && element.date?.month==widget.day.month).length>9
                         ? Padding(

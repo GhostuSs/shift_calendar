@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shift_calendar/data/template_data.dart';
-import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/icon/raw_icon.dart';
 
 import '../../../../../data/screen_resolution.dart';
@@ -48,7 +47,9 @@ class TemplatesCard extends StatelessWidget {
                         top: size.height! * 0.01,
                         bottom: size.height! * 0.01),
                     child: RawIcon(
-                      size: 30,
+                      size: size.height! > 800
+                          ? size.height! * 0.04
+                          : size.height! * 0.06,
                       data: data,
                     ),
                   ),
@@ -60,14 +61,26 @@ class TemplatesCard extends StatelessWidget {
                         Text('${data.name}',
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
-                            style: AppTypography.normal14Black),
+                            style: TextStyle(
+                                fontFamily: 'sfprodisplay',
+                                fontSize: size.height! > 800
+                                    ? size.height! * 0.018
+                                    : size.height! * 0.022,
+                                color: ProjectColors.black,
+                                fontWeight: FontWeight.w500)),
                         Row(
                           children: [
                             Text(
                               type == DescriptionType.note
                                   ? data.note ?? ''
                                   : checkAllDay(),
-                              style: AppTypography.normal10Black,
+                              style: TextStyle(
+                                  fontFamily: 'sfprodisplay',
+                                  fontSize: size.height! > 800
+                                      ? size.height! * 0.013
+                                      : size.height! * 0.017,
+                                  color: ProjectColors.black,
+                                  fontWeight: FontWeight.w400),
                             )
                           ],
                         )
@@ -99,7 +112,7 @@ class TemplatesCard extends StatelessWidget {
     retData = time.inMinutes % 60 < 10
         ? retData + ':0${time.inMinutes % 60}'
         : retData + ':${time.inMinutes % 60}';
-    retData = amPm == 1 ? retData + ' PM' : retData + ' AM';
+    retData = amPm == 1 ? retData + ' pm' : retData + ' am';
     return retData;
   }
 }
