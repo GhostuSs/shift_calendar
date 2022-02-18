@@ -97,7 +97,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
     for (int i = 0; i < prov.templates!.length; i++) {
       if (prov.templates![i].date?.day == selectedDay?.day &&
           prov.templates![i].date?.month == selectedDay?.month) {
-        if (data.length < 4) {
+        if (data.length < 3) {
           data.add(Padding(
             padding: EdgeInsets.only(right: size.height! * 0.0055),
             child: RawIcon(
@@ -114,7 +114,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Padding(
                       padding: EdgeInsets.all(size.height! * 0.005),
                       child: Text(
-                        '+${prov.templates!.where((element) => element.date?.day == selectedDay?.day && element.date?.month == selectedDay?.month).length - 4}',
+                        '+${prov.templates!.where((element) => element.date?.day == selectedDay?.day && element.date?.month == selectedDay?.month).length - 3}',
                         style: AppTypography.normal14White,
                       )),
                 ),
@@ -122,6 +122,7 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                     borderRadius: BorderRadius.circular(5),
                     color: ProjectColors.darkGray),
               )));
+          break;
         }
       }
     }

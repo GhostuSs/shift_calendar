@@ -6,6 +6,7 @@ import 'package:shift_calendar/ui/screens/calendar/ui/description_of_day_screen.
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../data/screen_resolution.dart';
+import '../../../../data/template_data.dart';
 import '../../../../data/templates_data.dart';
 import '../../../res/theme.dart';
 import '../../../res/uikit/icon/raw_icon.dart';
@@ -23,7 +24,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime selectedDay = DateTime.now();
   late Templates data;
 
-  /*
   final List<TemplateData> initialData = [
     TemplateData(
         //date: DateTime(2022, 2, 23, 00, 00),
@@ -72,12 +72,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
         allDay: true,
         color: ProjectColors.purple,
         iconIndex: 5),
-  ];*/
+  ];
 
   @override
   initState() {
     if (context.read<Templates>().templates!.isEmpty == true) {
-      //context.read<Templates>().templates!.addAll(initialData);
+      context.read<Templates>().templates!.addAll(initialData);
     }
     data = context.read<Templates>();
     super.initState();
@@ -123,23 +123,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   children: [
                     SizedBox(
                       width: size.height! * 0.02,
-                    ),
-                    Expanded(
                       child: Text(
                         data.templates
                                     ?.where((element) =>
-                                        element.date?.day == selectedDay.day &&
-                                        element.date?.month ==
-                                            selectedDay.month)
-                                    .isNotEmpty ==
-                                true
-                            ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)}'})'
-                            : '',
-                        style: const TextStyle(
-                            color: ProjectColors.white,
-                            overflow: TextOverflow.ellipsis),
-                      ),
-                    ),
+                                          element.date?.day ==
+                                              selectedDay.day &&
+                                          element.date?.month ==
+                                              selectedDay.month)
+                                      .isNotEmpty ==
+                                  true
+                              ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPm ?? 0)}'})'
+                              : '',
+                          style: const TextStyle(
+                              color: ProjectColors.white,
+                              overflow: TextOverflow.ellipsis),
+                        )),
                   ],
                 ),
                 Padding(
@@ -231,14 +229,36 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                for (int index = 0; index < data.templates!.length; index++)
+                for (int index = 0; index < 9; index++)
                   Padding(
                     padding: EdgeInsets.only(left: size.height! * 0.008),
                     child: RawIcon(
                       size: size.height! * 0.035,
                       data: data.templates![index],
                     ),
-                  )
+                  ),
+                data.templates!.length > 9
+                    ? Padding(
+                        padding: EdgeInsets.only(left: size.height! * 0.0055),
+                        child: Container(
+                          width: size.height! * 0.036,
+                          height: size.height! * 0.036,
+                          child: Center(
+                            child: Padding(
+                                padding: EdgeInsets.all(size.height! * 0.005),
+                                child: Text(
+                                  '+${data.templates!.length - 9}',
+                                  style: TextStyle(
+                                      fontFamily: 'sfprodisplay',
+                                      fontSize: size.height! * 0.015,
+                                      color: ProjectColors.white),
+                                )),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: ProjectColors.darkGray),
+                        ))
+                    : Container()
               ],
             ),
           )

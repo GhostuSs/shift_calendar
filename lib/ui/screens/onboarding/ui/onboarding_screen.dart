@@ -29,6 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     final Resolution size = context.read<Resolution>();
     size.set(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
+    print(size.height);
     return Scaffold(
       backgroundColor: ProjectColors.darkGray,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

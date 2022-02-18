@@ -64,7 +64,7 @@ class _DayTemplatesState extends State<DayTemplates> {
           child: Column(
             children: [
               Container(
-                height: size.height! * 0.45,
+                height: size.height! * 0.77,
                 child: ListView(
                   children: [
                     Column(
@@ -106,17 +106,41 @@ class _DayTemplatesState extends State<DayTemplates> {
                                       .read<Templates>()
                                       .templates![index]
                               .date
-                              ?.month ==
-                              widget.day.month)
+                                      ?.month ==
+                                  widget.day.month)
                           ? Padding(
-                        padding: const EdgeInsets.only(left: 7),
-                        child: RawIcon(
-                          size: size.height! * 0.035,
-                          data:
-                          context.read<Templates>().templates![index],
-                        ),
-                      )
-                          : Container()
+                              padding: const EdgeInsets.only(left: 7),
+                              child: RawIcon(
+                                size: size.height! * 0.035,
+                                data:
+                                    context.read<Templates>().templates![index],
+                              ),
+                            )
+                          : Container(),
+/*
+                    context.read<Templates>().templates!.where((element) => element.date?.day==widget.day.day && element.date?.month==widget.day.month).length>9
+                        ? Padding(
+                        padding: EdgeInsets.only(right: size.height! * 0.0055),
+                        child: Container(
+                          width: size.height!*0.036,
+                          height: size.height!*0.036,
+                          child: Center(
+                            child: Padding(
+                                padding: EdgeInsets.all(size.height! * 0.005),
+                                child: Text(
+                                  '+${prov.templates!.where((element) => element.date?.day == widget.day?.day && element.date?.month == widget.day?.month).length - 3}',
+                                  style: TextStyle(
+                                    color: ProjectColors.white,
+                                    fontSize: size.height!*0.015,
+                                    fontFamily: 'sfprodisplay'
+                                  ),
+                                )),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: ProjectColors.darkGray),
+                        ))
+                        :Container()*/
                   ],
                 ),
               )

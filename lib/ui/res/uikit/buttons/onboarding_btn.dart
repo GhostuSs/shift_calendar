@@ -18,13 +18,19 @@ class OnboardingBtn extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: size.width! * 0.1),
         child: Container(
           child: InkWell(
-            borderRadius: BorderRadius.circular(size.height! * 0.03),
+            borderRadius: BorderRadius.circular(size.height! < 600
+                ? size.height! * 0.0425
+                : size.height! * 0.03125),
             onTap: onPressed,
             child: Container(
               width: double.infinity,
-              height: size.height! * 0.0625,
+              height: size.height! < 600
+                  ? size.height! * 0.085
+                  : size.height! * 0.0625,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(size.height! * 0.03),
+                  borderRadius: BorderRadius.circular(size.height! < 600
+                      ? size.height! * 0.0425
+                      : size.height! * 0.03125),
                   color: ProjectColors.white),
               child: Center(
                 child: Row(

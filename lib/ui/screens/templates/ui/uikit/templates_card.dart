@@ -34,7 +34,7 @@ class TemplatesCard extends StatelessWidget {
           onTap: onPressed,
           borderRadius: BorderRadius.circular(5),
           child: Container(
-              height: size.height! * 0.07,
+              height: 64,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
@@ -48,7 +48,7 @@ class TemplatesCard extends StatelessWidget {
                         top: size.height! * 0.01,
                         bottom: size.height! * 0.01),
                     child: RawIcon(
-                      size: size.height! * 0.04,
+                      size: 30,
                       data: data,
                     ),
                   ),
@@ -93,8 +93,9 @@ class TemplatesCard extends StatelessWidget {
 
   String formatTime(Duration time, int amPm) {
     String retData = '';
-    retData =
-        time.inHours < 10 ? '0${time.inHours % 12}' : '${time.inHours % 12}';
+    retData = time.inHours % 12 < 10
+        ? '0${time.inHours % 12}'
+        : '${time.inHours % 12}';
     retData = time.inMinutes % 60 < 10
         ? retData + ':0${time.inMinutes % 60}'
         : retData + ':${time.inMinutes % 60}';
