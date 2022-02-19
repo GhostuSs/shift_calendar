@@ -27,8 +27,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
   final List<TemplateData> initialData = [
     TemplateData(
         //date: DateTime(2022, 2, 23, 00, 00),
-        startTime: const Duration(hours: 17, minutes: 30),
-        endTime: const Duration(hours: 21, minutes: 30),
+        startTime: const Duration(hours: 9, minutes: 0),
+        endTime: const Duration(hours: 5, minutes: 0),
         name: 'Day work shift',
         amPmStart: 0,
         amPmEnd: 1,
@@ -36,8 +36,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         iconIndex: 0),
     TemplateData(
         //date: DateTime(2022, 2, 23, 00, 00),
-        startTime: const Duration(hours: 16, minutes: 30),
-        endTime: const Duration(hours: 20, minutes: 30),
+        startTime: const Duration(hours: 10, minutes: 0),
+        endTime: const Duration(hours: 6, minutes: 0),
         name: 'Night work shift',
         amPmStart: 1,
         amPmEnd: 0,

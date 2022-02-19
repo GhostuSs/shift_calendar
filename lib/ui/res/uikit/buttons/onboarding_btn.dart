@@ -15,7 +15,9 @@ class OnboardingBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     final Resolution size = context.read<Resolution>();
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: size.width! * 0.1),
+        padding: EdgeInsets.symmetric(
+            horizontal:
+                size.height! < 800 ? size.width! * 0.1 : size.width! * 0.2),
         child: Container(
           child: InkWell(
             borderRadius: BorderRadius.circular(size.height! < 800
