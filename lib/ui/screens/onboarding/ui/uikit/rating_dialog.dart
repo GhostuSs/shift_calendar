@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../res/colors/colors.dart';
 
@@ -30,9 +31,9 @@ class RateMyApp extends StatelessWidget {
                   clipBehavior: Clip.hardEdge,
                   child: Image.asset(
                     'assets/icons/appIcon.png',
-                    width: 64,
+                    width: 64.h,
                     filterQuality: FilterQuality.high,
-                    height: 64,
+                    height: 64.h,
                   ),
                 ),
               ),
@@ -41,7 +42,7 @@ class RateMyApp extends StatelessWidget {
                 child: Text(
                   'Please rate the app',
                   style: TextStyle(
-                      fontFamily: 'JosefinSans-Bold',
+                      fontFamily: 'sfprodisplay',
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: ProjectColors.white),
@@ -54,7 +55,7 @@ class RateMyApp extends StatelessWidget {
             textAlign: TextAlign.center,
             overflow: TextOverflow.fade,
             style: TextStyle(
-                fontFamily: 'JosefinSans-Light',
+                fontFamily: 'sfprodisplay',
                 fontSize: 11,
                 color: ProjectColors.white),
           ),
