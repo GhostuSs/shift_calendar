@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 
-import '../../../../data/screen_resolution.dart';
 import '../../colors/colors.dart';
 
 class OnboardingBtn extends StatelessWidget {
@@ -13,48 +12,37 @@ class OnboardingBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Resolution size = context.read<Resolution>();
     return Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal:
-                size.height! < 800 ? size.width! * 0.1 : size.width! * 0.2),
-        child: Container(
-          child: InkWell(
-            borderRadius: BorderRadius.circular(size.height! < 800
-                ? size.height! * 0.0425
-                : size.height! * 0.03125),
-            onTap: onPressed,
-            child: Container(
-              width: double.infinity,
-              height: size.height! < 600
-                  ? size.height! * 0.085
-                  : size.height! * 0.0625,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(size.height! < 800
-                      ? size.height! * 0.0425
-                      : size.height! * 0.03125),
-                  color: ProjectColors.white),
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      label,
-                      style: AppTypography.normal18Black,
-                    ),
-                    SizedBox(
-                      width: size.height! * 0.01,
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      color: ProjectColors.black,
-                      size: 18,
-                    )
-                  ],
+        padding: EdgeInsets.symmetric(horizontal: 64.w),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(30.h),
+          onTap: onPressed,
+          child: Container(
+            width: 247.w,
+            height: 56.h,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.h),
+                color: ProjectColors.white),
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    label,
+                    style: AppTypography.normal18Black.copyWith(fontSize: 16.h),
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: ProjectColors.black,
+                    size: 15.h,
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      ),
         ));
   }
 }

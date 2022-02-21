@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shift_calendar/routes.dart';
@@ -16,7 +17,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   seen = prefs.getBool("seen") ?? false;
-  subscribe = prefs.getBool("subscrube") ?? false;
+  subscribe = prefs.getBool("subscribe") ?? false;
+  seen = false;
   runApp(const App());
 }
 
@@ -37,12 +39,14 @@ class _App extends State<App> {
         Provider<Templates>(create: (_) => Templates()),
         Provider<Resolution>(create: (_) => Resolution()),
       ],
-      child: MaterialApp(
-          theme: AppTheme.theme,
-          color: ProjectColors.white,
-          debugShowCheckedModeBanner: false,
-          initialRoute: seen == true ? '/' : '/onboarding',
-          routes: routes),
+      child: ScreenUtilInit(
+          builder: () => MaterialApp(
+              theme: AppTheme.theme,
+              color: ProjectColors.white,
+              debugShowCheckedModeBanner: false,
+              initialRoute:
+                  seen == true && subscribe == true ? '/' : '/onboarding',
+              routes: routes)),
     );
   }
 }
