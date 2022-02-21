@@ -8,6 +8,7 @@ import 'package:shift_calendar/ui/screens/templates/ui/uikit/templates_card.dart
 
 import '../../../../data/screen_resolution.dart';
 import '../../../../data/templates_data.dart';
+import '../../../../main.dart';
 import '../../../res/uikit/icon/raw_icon.dart';
 
 class DayTemplates extends StatefulWidget {
@@ -43,27 +44,41 @@ class _DayTemplatesState extends State<DayTemplates> {
         backBtn: true,
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.add,
-          color: ProjectColors.white,
-        ),
-        backgroundColor: ProjectColors.black,
-        onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => TemplateScreen(
-                    data: TemplateData(date: widget.day),
-                    notifyParent: () => setState(() {
-                          widget.notifyParent();
-                        })))),
-      ),
+          child: const Icon(
+            Icons.add,
+            color: ProjectColors.white,
+          ),
+          backgroundColor: ProjectColors.black,
+          onPressed: () {
+            final int counterDay = prov.templates
+                    ?.where((element) =>
+                        element.date?.day == widget.day.day &&
+                        element.date?.month == widget.day.month)
+                    .length ??
+                0;
+            final int counterMonth = prov.templates
+                    ?.where(
+                        (element) => element.date?.month == widget.day.month)
+                    .length ??
+                0;
+            subscribe == false && counterDay > 0 || counterMonth > 4
+                ? Navigator.pushNamed(context, '/onboarding')
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => TemplateScreen(
+                            data: TemplateData(date: widget.day),
+                            notifyParent: () => setState(() {
+                                  widget.notifyParent();
+                                }))));
+          }),
       backgroundColor: ProjectColors.white,
       body: Padding(
           padding: EdgeInsets.symmetric(
               vertical: size.height! * 0.02, horizontal: size.height! * 0.01),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: size.height! * 0.77,
                 child: ListView(
                   children: [

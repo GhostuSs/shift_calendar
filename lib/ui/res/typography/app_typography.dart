@@ -11,7 +11,8 @@ abstract class AppTypography {
       fontFamily: _fontFamily,
       fontSize: 18,
       color: ProjectColors.black,
-      fontWeight: FontWeight.w600);
+      letterSpacing: 1.15,
+      fontWeight: FontWeight.w500);
 
   static const TextStyle regular18Black = TextStyle(
       fontFamily: _fontFamily,

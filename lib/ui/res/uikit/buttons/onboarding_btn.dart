@@ -30,7 +30,7 @@ class OnboardingBtn extends StatelessWidget {
                   Text(
                     label,
                     style: AppTypography.normal18Black
-                        .copyWith(fontSize: 18.h, fontWeight: FontWeight.w600),
+                        .copyWith(fontSize: 15.h, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(
                     width: 10.w,
@@ -38,7 +38,7 @@ class OnboardingBtn extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_ios,
                     color: ProjectColors.black,
-                    size: 16.h,
+                    size: 12.h,
                   )
                 ],
               ),

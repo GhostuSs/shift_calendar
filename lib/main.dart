@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,10 @@ class App extends StatefulWidget{
 class _App extends State<App> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: [
         Provider<Templates>(create: (_) => Templates()),
@@ -45,7 +50,7 @@ class _App extends State<App> {
               debugShowCheckedModeBanner: false,
               initialRoute:
                   seen == true && subscribe == true ? '/' : '/onboarding',
-              routes: routes)),
+                  routes: routes)),
     );
   }
 }

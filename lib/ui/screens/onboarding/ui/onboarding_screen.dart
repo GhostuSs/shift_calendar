@@ -26,6 +26,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(subscribe);
+    print(seen);
     return subscribe == false && seen == true
         ? Scaffold(
             backgroundColor: const Color(0xFF151515),
@@ -43,9 +45,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       color: ProjectColors.lightGray.withOpacity(0.2),
                       size: 30,
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                    onPressed: () async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setBool('subscribe', false);
+                      await prefs.setBool('seen', true);
+                      seen = true;
                       subscribe = false;
+                      Navigator.pushNamed(context, '/');
                     },
                   ),
                 ),
@@ -56,7 +63,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       await prefs.setBool('subscribe', true);
+                      subscribe = true;
                       await prefs.setBool("seen", true);
+                      seen = true;
                       Navigator.pushNamed(context, '/');
                     }),
                 SizedBox(
@@ -119,9 +128,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             color: ProjectColors.lightGray.withOpacity(0.2),
                             size: 30,
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/');
+                          onPressed: () async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
                             subscribe = false;
+                            prefs.setBool('subscribe', false);
+                            prefs.setBool('seen', true);
+                            seen = true;
+                            Navigator.pushNamed(context, '/');
                           },
                         ),
                       )
@@ -141,6 +155,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           prefs.setBool('subscribe', true);
                           prefs.setBool("seen", true);
                           subscribe = true;
+                          seen = true;
                         }
                       }
                       if (currentIndex < OnBoardingImages.dataList.length - 1) {
