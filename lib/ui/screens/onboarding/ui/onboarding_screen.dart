@@ -26,15 +26,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF151515),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          currentIndex == 3
-              ? Padding(
+    return subscribe == false && seen == true
+        ? Scaffold(
+            backgroundColor: const Color(0xFF151515),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
                   padding: EdgeInsets.only(top: 65.h, right: 16.w),
                   child: IconButton(
                     icon: Icon(
@@ -47,48 +48,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       subscribe = false;
                     },
                   ),
-                )
-              : Container(),
-          Spacer(),
-          OnboardingBtn(
-              label: 'Continue',
-              onPressed: () async {
-                if (currentIndex == 1) {
-                  await showCupertinoDialog(
-                      context: context,
-                      builder: (BuildContext context) => const RateMyApp());
-                  if (currentIndex == 3) {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.setBool('subscribe', true);
-                    prefs.setBool("seen", true);
-                    subscribe = true;
-                  }
-                }
-                if (currentIndex < OnBoardingImages.dataList.length - 1) {
-                  if (currentIndex == 2) setState(() {});
-                  currentIndex++;
-                  pageController.animateToPage(currentIndex,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.linear);
-                } else {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  await prefs.setBool("seen", true);
-                  Navigator.pushNamed(context, '/');
-                }
-              }),
-          SizedBox(
-            height: 35.w,
-          ),
-          Padding(
-              padding: EdgeInsets.only(left: 51.w, right: 51.w, bottom: 56.h),
-              child: Opacity(
-                opacity: 0.5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
+                ),
+                Spacer(),
+                OnboardingBtn(
+                    label: 'Continue',
+                    onPressed: () async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setBool('subscribe', true);
+                      await prefs.setBool("seen", true);
+                      Navigator.pushNamed(context, '/');
+                    }),
+                SizedBox(
+                  height: 35.w,
+                ),
+                Padding(
+                    padding:
+                        EdgeInsets.only(left: 51.w, right: 51.w, bottom: 56.h),
+                    child: Opacity(
+                      opacity: 0.5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
                       'Terms of Use',
                       style: AppTypography.normal14GreyUnderlined,
                     ),
@@ -109,16 +91,113 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           controller: pageController,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        filterQuality: FilterQuality.high,
-                        image: Svg(
-                          OnBoardingImages.dataList[currentIndex],
-                          scale: 6.0,
-                          source: SvgSource.asset,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              filterQuality: FilterQuality.high,
+                              image: Svg(
+                                OnBoardingImages.dataList[3],
+                                scale: 6.0,
+                                source: SvgSource.asset,
+                              ),
+                              fit: BoxFit.cover)),
+                    )),
+          )
+        : Scaffold(
+            backgroundColor: const Color(0xFF151515),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                currentIndex == 3
+                    ? Padding(
+                        padding: EdgeInsets.only(top: 65.h, right: 16.w),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.clear,
+                            color: ProjectColors.lightGray.withOpacity(0.2),
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/');
+                            subscribe = false;
+                          },
                         ),
-                        fit: BoxFit.cover)),
-          )),
-    );
+                      )
+                    : Container(),
+                Spacer(),
+                OnboardingBtn(
+                    label: 'Continue',
+                    onPressed: () async {
+                      if (currentIndex == 1) {
+                        await showCupertinoDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                const RateMyApp());
+                        if (currentIndex == 3) {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setBool('subscribe', true);
+                          prefs.setBool("seen", true);
+                          subscribe = true;
+                        }
+                      }
+                      if (currentIndex < OnBoardingImages.dataList.length - 1) {
+                        if (currentIndex == 2) setState(() {});
+                        currentIndex++;
+                        pageController.animateToPage(currentIndex,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.linear);
+                      } else {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        await prefs.setBool("seen", true);
+                        Navigator.pushNamed(context, '/');
+                      }
+                    }),
+                SizedBox(
+                  height: 35.w,
+                ),
+                Padding(
+                    padding:
+                        EdgeInsets.only(left: 51.w, right: 51.w, bottom: 56.h),
+                    child: Opacity(
+                      opacity: 0.5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
+                            'Terms of Use',
+                            style: AppTypography.normal14GreyUnderlined,
+                          ),
+                          Text(
+                            'Restore',
+                            style: AppTypography.normal14GreyUnderlined,
+                          ),
+                          Text(
+                            'Privacy policy',
+                            style: AppTypography.normal14GreyUnderlined,
+                          ),
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+            body: PageView.builder(
+                controller: pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) => Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              filterQuality: FilterQuality.high,
+                              image: Svg(
+                                OnBoardingImages.dataList[currentIndex],
+                                scale: 6.0,
+                                source: SvgSource.asset,
+                              ),
+                              fit: BoxFit.cover)),
+                    )),
+          );
   }
 }

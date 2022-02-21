@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
 import 'package:shift_calendar/ui/res/uikit/icon/raw_icon.dart';
@@ -54,7 +55,9 @@ class RawAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                           onPressed: () => Navigator.pop(context),
                         )
-                      : Container(width: 47),
+                      : Container(
+                          width: 10.w,
+                        ),
                   Padding(
                     padding: addBtn == true
                         ? const EdgeInsets.only(bottom: 0)

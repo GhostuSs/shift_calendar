@@ -18,7 +18,6 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   seen = prefs.getBool("seen") ?? false;
   subscribe = prefs.getBool("subscribe") ?? false;
-  seen = false;
   runApp(const App());
 }
 
