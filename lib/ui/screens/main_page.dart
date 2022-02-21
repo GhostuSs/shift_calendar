@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shift_calendar/main.dart';
 import 'package:shift_calendar/ui/screens/settings/ui/settings_screen.dart';
 import 'package:shift_calendar/ui/screens/templates/ui/templates_screen.dart';
@@ -53,30 +54,32 @@ class _MainPageState extends State<MainPage> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Image.asset(AppImages.calendar,
-                  color: ProjectColors.usualGray,
-                  filterQuality: FilterQuality.high),
+              icon: SvgPicture.asset(
+                AppImages.calendar,
+                color: ProjectColors.usualGray,
+              ),
               label: 'Calendar',
-              activeIcon: Image.asset(AppImages.calendar,
-                  color: ProjectColors.black,
-                  filterQuality: FilterQuality.high)),
+              activeIcon: SvgPicture.asset(AppImages.calendar,
+                  color: ProjectColors.black)),
           BottomNavigationBarItem(
-              icon: Image.asset(AppImages.templates,
-                  color: ProjectColors.usualGray,
-                  filterQuality: FilterQuality.high),
+              icon: SvgPicture.asset(
+                AppImages.templates,
+                color: ProjectColors.usualGray,
+              ),
               label: 'Templates',
-              activeIcon: Image.asset(AppImages.templates,
-                  color: ProjectColors.black,
-                  filterQuality: FilterQuality.high)),
+              activeIcon: SvgPicture.asset(
+                AppImages.templates,
+                color: ProjectColors.black,
+              )),
           BottomNavigationBarItem(
-              icon: Image.asset(AppImages.settings,
-                  color: ProjectColors.usualGray,
-                  filterQuality: FilterQuality.high),
+              icon: SvgPicture.asset(
+                AppImages.settings,
+                color: ProjectColors.usualGray,
+              ),
               label: 'Settings',
-              activeIcon: Image.asset(
+              activeIcon: SvgPicture.asset(
                 AppImages.settings,
                 color: ProjectColors.black,
-                filterQuality: FilterQuality.high,
               )),
         ],
       ),
