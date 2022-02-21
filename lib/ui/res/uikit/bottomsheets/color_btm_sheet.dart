@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shift_calendar/ui/res/colors/colors.dart';
 import 'package:shift_calendar/ui/res/typography/app_typography.dart';
@@ -46,14 +47,14 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                     padding: EdgeInsets.only(left: size.width! * 0.02),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(size.height! < 600
+                      borderRadius: BorderRadius.circular(size.height! < 800
                           ? size.height! * 0.038
                           : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.backgroundGray),
                       child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
-                            : size.height! < 600
+                            : size.height! < 800
                                 ? size.height! * 0.038
                                 : size.height! * 0.033,
                         backgroundColor: widget.templateData.color ==
@@ -61,9 +62,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                             ? ProjectColors.black
                             : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.backgroundGray,
                         ),
                       ),
@@ -71,12 +72,12 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                   padding: EdgeInsets.only(left: size.width! * 0.02),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(size.height! < 600
+                    borderRadius: BorderRadius.circular(size.height! < 800
                         ? size.height! * 0.038
                         : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.amber),
                     child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
                             : size.height! * 0.033,
                         backgroundColor:
@@ -84,9 +85,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.amber,
                         )),
                   ),
@@ -94,12 +95,12 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                   padding: EdgeInsets.only(left: size.width! * 0.024),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(size.height! < 600
+                    borderRadius: BorderRadius.circular(size.height! < 800
                         ? size.height! * 0.038
                         : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.orange),
                     child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
                             : size.height! * 0.033,
                         backgroundColor:
@@ -107,9 +108,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.orange,
                         )),
                   ),
@@ -117,12 +118,12 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                   padding: EdgeInsets.only(left: size.width! * 0.024),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(size.height! < 600
+                    borderRadius: BorderRadius.circular(size.height! < 800
                         ? size.height! * 0.038
                         : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.coralRed),
                     child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
                             : size.height! * 0.033,
                         backgroundColor:
@@ -130,9 +131,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.coralRed,
                         )),
                   ),
@@ -140,12 +141,12 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                   padding: EdgeInsets.only(left: size.width! * 0.024),
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(size.height! < 600
+                    borderRadius: BorderRadius.circular(size.height! < 800
                         ? size.height! * 0.038
                         : size.height! * 0.033),
                     onTap: () => _onTap(ProjectColors.purple),
                     child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
                             : size.height! * 0.033,
                         backgroundColor:
@@ -153,9 +154,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.purple,
                         )),
                   ),
@@ -163,7 +164,7 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 10.h,
             ),
             Flex(
               direction: Axis.horizontal,
@@ -172,12 +173,12 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                     padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(size.height! < 600
+                      borderRadius: BorderRadius.circular(size.height! < 800
                           ? size.height! * 0.04
                           : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.lightGreen),
                       child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.04
                               : size.height! * 0.033,
                           backgroundColor: widget.templateData.color ==
@@ -185,21 +186,21 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                               ? ProjectColors.black
                               : ProjectColors.lightGray,
                           child: CircleAvatar(
-                            radius: size.height! < 600
+                            radius: size.height! < 800
                                 ? size.height! * 0.038
-                                : size.height! * 0.033,
+                                : size.height! * 0.03,
                             backgroundColor: ProjectColors.lightGreen,
                           )),
                     )),
                 Padding(
                     padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(size.height! < 600
+                      borderRadius: BorderRadius.circular(size.height! < 800
                           ? size.height! * 0.038
                           : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.darkGreen),
                       child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
                             : size.height! * 0.033,
                         backgroundColor:
@@ -207,9 +208,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.darkGreen,
                         ),
                       ),
@@ -217,12 +218,12 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                     padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(size.height! < 600
+                      borderRadius: BorderRadius.circular(size.height! < 800
                           ? size.height! * 0.038
                           : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.lightBlue),
                       child: CircleAvatar(
-                        radius: size.height! < 600
+                        radius: size.height! < 800
                             ? size.height! * 0.04
                             : size.height! * 0.033,
                         backgroundColor:
@@ -230,9 +231,9 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.lightBlue,
                         ),
                       ),
@@ -240,7 +241,7 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                     padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: CircleAvatar(
-                      radius: size.height! < 600
+                      radius: size.height! < 800
                           ? size.height! * 0.04
                           : size.height! * 0.033,
                       backgroundColor:
@@ -248,14 +249,14 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                               ? ProjectColors.black
                               : ProjectColors.lightGray,
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(size.height! < 600
+                        borderRadius: BorderRadius.circular(size.height! < 800
                             ? size.height! * 0.038
                             : size.height! * 0.033),
                         onTap: () => _onTap(ProjectColors.darkBlue),
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.darkBlue,
                         ),
                       ),
@@ -263,22 +264,22 @@ class _ColorBtmSheetState extends State<ColorBtmSheet> {
                 Padding(
                     padding: EdgeInsets.only(left: size.width! * 0.024),
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(size.height! < 600
+                      borderRadius: BorderRadius.circular(size.height! < 800
                           ? size.height! * 0.04
                           : size.height! * 0.033),
                       onTap: () => _onTap(ProjectColors.black),
                       child: CircleAvatar(
-                        radius: size.height! < 600
-                            ? size.height! * 0.038
+                        radius: size.height! < 800
+                            ? size.height! * 0.037
                             : size.height! * 0.033,
                         backgroundColor:
                             widget.templateData.color == ProjectColors.black
                                 ? ProjectColors.black
                                 : ProjectColors.lightGray,
                         child: CircleAvatar(
-                          radius: size.height! < 600
+                          radius: size.height! < 800
                               ? size.height! * 0.038
-                              : size.height! * 0.033,
+                              : size.height! * 0.03,
                           backgroundColor: ProjectColors.darkGray,
                         ),
                       ),
