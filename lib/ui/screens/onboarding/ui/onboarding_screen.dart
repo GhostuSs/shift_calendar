@@ -70,7 +70,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
                 Padding(
                     padding:
-                        EdgeInsets.only(left: 51.w, right: 51.w, bottom: 56.h),
+                        EdgeInsets.only(left: 51.w, right: 51.w, bottom: 60.h),
                     child: Opacity(
                       opacity: 0.5,
                       child: Row(
@@ -78,10 +78,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         children: const [
                           Text(
                             'Terms of Use',
-                      style: AppTypography.normal14GreyUnderlined,
-                    ),
-                    Text(
-                      'Restore',
+                            style: AppTypography.normal14GreyUnderlined,
+                          ),
+                          Text(
+                            'Restore',
                       style: AppTypography.normal14GreyUnderlined,
                     ),
                     Text(
@@ -113,7 +113,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 currentIndex == 3
@@ -134,6 +133,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             seen = true;
                             Navigator.pushNamed(context, '/');
                           },
+                        ),
+                      )
+                    : Container(),
+                currentIndex == 1
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height > 800
+                                ? 200.h
+                                : 80.h),
+                        child: Center(
+                          child: Image.asset('assets/icons/illustration.png'),
                         ),
                       )
                     : Container(),
