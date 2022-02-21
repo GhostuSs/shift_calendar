@@ -25,9 +25,9 @@ class RateMyApp extends StatelessWidget {
             children: [
               Container(
                 decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    BoxDecoration(borderRadius: BorderRadius.circular(10.h)),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.h),
                   clipBehavior: Clip.hardEdge,
                   child: Image.asset(
                     'assets/icons/appIcon.png',
