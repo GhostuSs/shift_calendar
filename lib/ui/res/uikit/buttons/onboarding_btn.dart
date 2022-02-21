@@ -19,7 +19,7 @@ class OnboardingBtn extends StatelessWidget {
           onTap: onPressed,
           child: Container(
             width: 247.w,
-            height: 56.h,
+            height: MediaQuery.of(context).size.height > 800 ? 48.h : 56.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.h),
                 color: ProjectColors.white),

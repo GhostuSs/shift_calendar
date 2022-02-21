@@ -32,7 +32,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Padding(
@@ -55,19 +54,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
                 Spacer(),
-                OnboardingBtn(
-                    label: 'Continue',
-                    onPressed: () async {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      await prefs.setBool('subscribe', true);
-                      subscribe = true;
-                      await prefs.setBool("seen", true);
-                      seen = true;
-                      Navigator.pushNamed(context, '/');
-                    }),
-                SizedBox(
-                  height: 35.w,
+                Padding(
+                  padding: EdgeInsets.only(bottom: 40.h),
+                  child: OnboardingBtn(
+                      label: 'Continue',
+                      onPressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        await prefs.setBool('subscribe', true);
+                        subscribe = true;
+                        await prefs.setBool("seen", true);
+                        seen = true;
+                        Navigator.pushNamed(context, '/');
+                      }),
                 ),
                 Padding(
                     padding:
@@ -78,7 +77,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
                           Text(
-                      'Terms of Use',
+                            'Terms of Use',
                       style: AppTypography.normal14GreyUnderlined,
                     ),
                     Text(
@@ -170,11 +169,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       }
                     }),
                 SizedBox(
-                  height: 35.w,
+                  height: 35.h,
                 ),
                 Padding(
-                    padding:
-                        EdgeInsets.only(left: 51.w, right: 51.w, bottom: 56.h),
+                    padding: EdgeInsets.only(
+                        left: 51.w,
+                        right: 51.w,
+                        bottom: MediaQuery.of(context).size.height > 800
+                            ? 20.h
+                            : 30.h),
                     child: Opacity(
                       opacity: 0.5,
                       child: Row(
