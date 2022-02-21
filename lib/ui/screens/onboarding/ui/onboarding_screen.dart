@@ -207,8 +207,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           image: DecorationImage(
                               filterQuality: FilterQuality.high,
                               image: Svg(
-                                OnBoardingImages.dataList[currentIndex],
-                                scale: 6.0,
+                                MediaQuery.of(context).size.height > 800
+                                    ? OnBoardingImages2.dataList[currentIndex]
+                                    : OnBoardingImages.dataList[currentIndex],
+                                scale: 8.0,
                                 source: SvgSource.asset,
                               ),
                               fit: BoxFit.cover)),
