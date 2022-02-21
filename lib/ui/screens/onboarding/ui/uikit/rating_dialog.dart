@@ -37,26 +37,26 @@ class RateMyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 5),
+              Padding(
+                padding: EdgeInsets.only(top: 10.h, bottom: 5.h),
                 child: Text(
                   'Please rate the app',
                   style: TextStyle(
                       fontFamily: 'sfprodisplay',
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 20.h,
                       color: ProjectColors.white),
                 ),
               ),
             ],
           ),
-          content: const Text(
+          content: Text(
             'Tap a star to rate. You can also leave a \ncomment ',
             textAlign: TextAlign.center,
             overflow: TextOverflow.fade,
             style: TextStyle(
                 fontFamily: 'sfprodisplay',
-                fontSize: 11,
+                fontSize: 11.h,
                 color: ProjectColors.white),
           ),
           actions: [
@@ -66,12 +66,12 @@ class RateMyApp extends StatelessWidget {
               itemCount: 5,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                  padding: EdgeInsets.symmetric(horizontal: 2.5.w),
                   child: Icon(
                     index == 4
                         ? Icons.star_border_outlined
                         : Icons.star_rounded,
-                    size: 24.0,
+                    size: 24.0.h,
                     color: CupertinoColors.systemBlue,
                   )),
             )),
@@ -90,7 +90,7 @@ class RateMyApp extends StatelessWidget {
                 Container(
                   width: 0.3,
                   color: Colors.white.withOpacity(0.3),
-                  height: 50,
+                  height: 50.h,
                 ),
                 CupertinoButton(
                     onPressed: () {
