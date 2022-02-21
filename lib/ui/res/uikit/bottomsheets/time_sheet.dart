@@ -111,9 +111,9 @@ class _TimeBtmSheetState extends State<TimeBtmSheet> {
                           widget.notifyParent();
                         });
                       },
-                      children: new List<Widget>.generate(61, (int index) {
-                        return new Center(
-                          child: new Text('${index}'),
+                      children: List<Widget>.generate(61, (int index) {
+                        return Center(
+                          child: Text('${index}'),
                         );
                       })),
                 ),

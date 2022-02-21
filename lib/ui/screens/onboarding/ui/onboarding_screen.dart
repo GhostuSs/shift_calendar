@@ -26,8 +26,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(subscribe);
-    print(seen);
     return subscribe == false && seen == true
         ? Scaffold(
             backgroundColor: const Color(0xFF151515),

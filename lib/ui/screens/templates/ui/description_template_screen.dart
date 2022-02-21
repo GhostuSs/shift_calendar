@@ -62,7 +62,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
               Navigator.pop(context);
             }
           } else {
-            print('contains');
+            debugPrint('contains');
           }
         },
       ),
@@ -108,7 +108,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                 style: AppTypography.normal14Black,
                               ),
                               const Spacer(),
-                              Container(
+                              SizedBox(
                                 width: 18,
                                 height: 18,
                                 child: iconSelector(),
