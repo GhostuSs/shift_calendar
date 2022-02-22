@@ -92,6 +92,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     size.set(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         backgroundColor: ProjectColors.black,
         onPressed: () {
@@ -127,12 +128,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     Expanded(
                       child: Text(
                         data.templates
-                                    ?.where((element) =>
-                                        element.date?.day == selectedDay.day &&
-                                        element.date?.month ==
-                                            selectedDay.month)
-                                    .isNotEmpty ==
-                                true
+                            ?.where((element) =>
+                        element.date?.day == selectedDay.day &&
+                            element.date?.month ==
+                                selectedDay.month)
+                            .isNotEmpty ==
+                            true
                             ? '(${data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).name} / ${data.templates!.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).allDay == true ? 'All day' : '${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).startTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmStart ?? 0)} - ${formatTime(data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).endTime ?? const Duration(hours: 0, minutes: 0), data.templates?.firstWhere((element) => element.date?.day == selectedDay.day && element.date?.month == selectedDay.month).amPmEnd ?? 0)}'})'
                             : '',
                         overflow: TextOverflow.ellipsis,
@@ -148,44 +149,44 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         vertical: size.height! * 0.01,
                         horizontal: size.height! * 0.02),
                     child: data.templates!
-                                .where((element) =>
-                                    element.date?.day == selectedDay.day &&
-                                    element.date?.month == selectedDay.month)
-                                .isNotEmpty ==
-                            true
+                        .where((element) =>
+                    element.date?.day == selectedDay.day &&
+                        element.date?.month == selectedDay.month)
+                        .isNotEmpty ==
+                        true
                         ? Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 5),
-                            decoration: BoxDecoration(
-                                color: ProjectColors.white,
-                                borderRadius: BorderRadius.circular(5)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 5),
+                      decoration: BoxDecoration(
+                          color: ProjectColors.white,
+                          borderRadius: BorderRadius.circular(5)),
                       child: RichText(
                         text: TextSpan(
                           style: const TextStyle(
                               color: ProjectColors.black,
                               fontFamily: 'sfprodisplay'),
                           text: data.templates!
-                                            .where((element) =>
-                                                element.date?.day ==
-                                                    selectedDay.day &&
-                                                element.date?.month ==
-                                                    selectedDay.month)
-                                            .isNotEmpty ==
-                                        true
-                                    ? data.templates!
-                                        .firstWhere((element) =>
-                                            element.date?.day ==
-                                                selectedDay.day &&
-                                            element.date?.month ==
-                                                selectedDay.month)
-                                        .note
-                                    : '',
-                              ),
-                            ),
-                          )
+                              .where((element) =>
+                          element.date?.day ==
+                              selectedDay.day &&
+                              element.date?.month ==
+                                  selectedDay.month)
+                              .isNotEmpty ==
+                              true
+                              ? data.templates!
+                              .firstWhere((element) =>
+                          element.date?.day ==
+                              selectedDay.day &&
+                              element.date?.month ==
+                                  selectedDay.month)
+                              .note
+                              : '',
+                        ),
+                      ),
+                    )
                         : Container(
-                            height: size.height! * 0.025,
-                          )),
+                      height: size.height! * 0.025,
+                    )),
               ],
             ),
           ),
@@ -233,8 +234,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 for (int index = 0;
-                    index < data.templates!.length && index < 6;
-                    index++)
+                index < data.templates!.length && index < 6;
+                index++)
                   Padding(
                     padding: EdgeInsets.only(left: size.height! * 0.008),
                     child: RawIcon(
@@ -244,25 +245,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ),
                 data.templates!.length > 5 && data.templates!.length - 6 != 0
                     ? Padding(
-                        padding: EdgeInsets.only(left: size.height! * 0.0055),
-                        child: Container(
-                          width: size.height! * 0.036,
-                          height: size.height! * 0.036,
-                          child: Center(
-                            child: Padding(
-                                padding: EdgeInsets.all(size.height! * 0.005),
-                                child: Text(
-                                  '+${data.templates!.length - 6}',
-                                  style: TextStyle(
-                                      fontFamily: 'sfprodisplay',
-                                      fontSize: size.height! * 0.015,
-                                      color: ProjectColors.white),
-                                )),
-                          ),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: ProjectColors.darkGray),
-                        ))
+                    padding: EdgeInsets.only(left: size.height! * 0.0055),
+                    child: Container(
+                      width: size.height! * 0.036,
+                      height: size.height! * 0.036,
+                      child: Center(
+                        child: Padding(
+                            padding: EdgeInsets.all(size.height! * 0.005),
+                            child: Text(
+                              '+${data.templates!.length - 6}',
+                              style: TextStyle(
+                                  fontFamily: 'sfprodisplay',
+                                  fontSize: size.height! * 0.015,
+                                  color: ProjectColors.white),
+                            )),
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: ProjectColors.darkGray),
+                    ))
                     : Container()
               ],
             ),
