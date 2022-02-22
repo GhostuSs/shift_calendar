@@ -44,18 +44,21 @@ class _TemplateScreenState extends State<TemplateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: RawAppBar(
-        height: MediaQuery.of(context).size.height,
-        title: widget.enableDeleting == Deleting.enabled ? 'Shift' : 'Template',
-        backBtn: true,
-        addBtn: true,
-        onPressed: () {
-          final Templates prov = context.read<Templates>();
-          if (prov.templates!
-              .where((element) => element.name == nameController.text)
-              .isEmpty) {
-            if (nameController.text.isNotEmpty == true) {
+    return WillPopScope(
+        child: Scaffold(
+          appBar: RawAppBar(
+            height: MediaQuery.of(context).size.height,
+            title: widget.enableDeleting == Deleting.enabled
+                ? 'Shift'
+                : 'Template',
+            backBtn: true,
+            addBtn: true,
+            onPressed: () {
+              final Templates prov = context.read<Templates>();
+              if (prov.templates!
+                  .where((element) => element.name == nameController.text)
+                  .isEmpty) {
+                if (nameController.text.isNotEmpty == true) {
               templateData.name = nameController.text;
               context.read<Templates>().templates!.add(templateData);
               widget.notifyParent();
@@ -139,28 +142,28 @@ class _TemplateScreenState extends State<TemplateScreen> {
                           child: Row(
                             children: [
                               const Text(
-                                'Select color',
-                                style: AppTypography.normal14Black,
-                              ),
-                              const Spacer(),
-                              Container(
-                                  width: 18,
-                                  height: 18,
-                                  decoration: BoxDecoration(
-                                      color: templateData.color,
-                                      borderRadius:
-                                          BorderRadius.circular(9.0))),
-                              IconButton(
-                                  onPressed: () => showModalBottomSheet(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          ColorBtmSheet(
-                                              templateData: templateData,
-                                              notifyParent: () =>
-                                                  setState(() {}))),
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: ProjectColors.black,
+                                    'Select color',
+                                    style: AppTypography.normal14Black,
+                                  ),
+                                  const Spacer(),
+                                  Container(
+                                      width: 18,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                          color: templateData.color,
+                                          borderRadius:
+                                              BorderRadius.circular(9.0))),
+                                  IconButton(
+                                      onPressed: () => showModalBottomSheet(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              ColorBtmSheet(
+                                                  templateData: templateData,
+                                                  notifyParent: () =>
+                                                      setState(() {}))),
+                                      icon: const Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: ProjectColors.black,
                                     size: 10,
                                   ))
                             ],
@@ -193,10 +196,10 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                 ),
                                 const Spacer(),
                                 CupertinoSwitch(
-                                    value: templateData.allDay ?? false,
-                                    onChanged: (value) => setState(
-                                        () => templateData.allDay = value))
-                              ],
+                                        value: templateData.allDay ?? false,
+                                        onChanged: (value) => setState(
+                                            () => templateData.allDay = value))
+                                  ],
                             ),
                           ),
                         ),
@@ -303,10 +306,11 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                 ),
                                 const Spacer(),
                                 CupertinoSwitch(
-                                    value: templateData.notifications ?? false,
-                                    onChanged: (value) => setState(() =>
-                                        templateData.notifications = value))
-                              ],
+                                        value:
+                                            templateData.notifications ?? false,
+                                        onChanged: (value) => setState(() =>
+                                            templateData.notifications = value))
+                                  ],
                             ),
                           ),
                         ),
@@ -321,64 +325,65 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     children: [
                       widget.enableDeleting == Deleting.enabled
                           ? TextButton(
-                              onPressed: () => showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      CupertinoAlertDialog(
-                                        title: const Text('Delete shift?'),
-                                        content: const Text(
-                                            'Are you sure you want to delete the shift?'),
-                                        actions: [
-                                          CupertinoDialogAction(
-                                            child: const Text('Cancel'),
-                                            onPressed: () =>
-                                                Navigator.pop(context),
-                                          ),
-                                          CupertinoDialogAction(
-                                            child: const Text(
-                                              'Delete',
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
-                                            isDefaultAction: true,
-                                            onPressed: () {
-                                              if (context
-                                                  .read<Templates>()
-                                                  .templates!
-                                                  .contains(templateData)) {
-                                                Navigator.pop(context);
-                                                context
-                                                    .read<Templates>()
-                                                    .templates!
-                                                    .remove(templateData);
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            const MainPage()));
-                                              }
-                                            },
-                                          )
-                                        ],
-                                      )),
-                              child: const Text(
-                                'Delete shift',
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontFamily: 'sfprodisplay',
-                                    fontSize: 16),
-                              ))
-                          : Container()
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+                                  onPressed: () => showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          CupertinoAlertDialog(
+                                            title: const Text('Delete shift?'),
+                                            content: const Text(
+                                                'Are you sure you want to delete the shift?'),
+                                            actions: [
+                                              CupertinoDialogAction(
+                                                child: const Text('Cancel'),
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                              ),
+                                              CupertinoDialogAction(
+                                                child: const Text(
+                                                  'Delete',
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                                isDefaultAction: true,
+                                                onPressed: () {
+                                                  if (context
+                                                      .read<Templates>()
+                                                      .templates!
+                                                      .contains(templateData)) {
+                                                    Navigator.pop(context);
+                                                    context
+                                                        .read<Templates>()
+                                                        .templates!
+                                                        .remove(templateData);
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                const MainPage()));
+                                                  }
+                                                },
+                                              )
+                                            ],
+                                          )),
+                                  child: const Text(
+                                    'Delete shift',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontFamily: 'sfprodisplay',
+                                        fontSize: 16),
+                                  ))
+                              : Container()
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        onWillPop: () async => false);
   }
 
   Widget iconSelector() {

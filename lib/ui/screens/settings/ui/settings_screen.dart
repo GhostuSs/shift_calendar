@@ -19,18 +19,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final Resolution size = context.read<Resolution>();
-    return Scaffold(
-      backgroundColor: ProjectColors.white,
-      appBar: RawAppBar(
-        title: 'Settings',
-        height: MediaQuery.of(context).size.height,
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: size.height! * 0.055, horizontal: size.height! * 0.01),
-        child: Column(
-          children: [
-            SettingsCard(
+    return WillPopScope(
+        child: Scaffold(
+          backgroundColor: ProjectColors.white,
+          appBar: RawAppBar(
+            title: 'Settings',
+            height: MediaQuery.of(context).size.height,
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: size.height! * 0.055,
+                horizontal: size.height! * 0.01),
+            child: Column(
+              children: [
+                SettingsCard(
               icon: const Icon(
                 Icons.info_outline_rounded,
                 color: ProjectColors.black,
@@ -75,16 +77,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: size.height! * 0.005,
             ),
             SettingsCard(
-              icon: const Icon(
-                Icons.share_rounded,
-                color: ProjectColors.black,
-              ),
-              text: 'Share',
-              onPressed: () {},
+                  icon: const Icon(
+                    Icons.share_rounded,
+                    color: ProjectColors.black,
+                  ),
+                  text: 'Share',
+                  onPressed: () {},
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
+        onWillPop: () async => false);
   }
 }

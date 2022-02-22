@@ -44,13 +44,15 @@ class _App extends State<App> {
         Provider<Resolution>(create: (_) => Resolution()),
       ],
       child: ScreenUtilInit(
-          builder: () => MaterialApp(
-              theme: AppTheme.theme,
-              color: ProjectColors.white,
-              debugShowCheckedModeBanner: false,
-              initialRoute:
-                  seen == true && subscribe == true ? '/' : '/onboarding',
-                  routes: routes)),
+          builder: () => WillPopScope(
+              child: MaterialApp(
+                  theme: AppTheme.theme,
+                  color: ProjectColors.white,
+                  debugShowCheckedModeBanner: false,
+                  initialRoute:
+                      seen == true && subscribe == true ? '/' : '/onboarding',
+                  routes: routes),
+              onWillPop: () async => false)),
     );
   }
 }

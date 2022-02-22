@@ -91,18 +91,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final Resolution size = context.read<Resolution>();
     size.set(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ProjectColors.black,
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => DayTemplates(
-                      day: selectedDay, notifyParent: () => setState(() {}))));
-        },
-        child: const Icon(
+    return WillPopScope(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: ProjectColors.black,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => DayTemplates(
+                          day: selectedDay,
+                          notifyParent: () => setState(() {}))));
+            },
+            child: const Icon(
           Icons.edit,
           color: ProjectColors.white,
         ),
@@ -260,17 +262,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                   color: ProjectColors.white),
                             )),
                       ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: ProjectColors.darkGray),
-                    ))
-                    : Container()
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: ProjectColors.darkGray),
+                            ))
+                        : Container()
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        onWillPop: () async => false);
   }
 
   String formatDate() {

@@ -29,31 +29,34 @@ class _TemplatesScreenState extends State<TemplatesScreen> {
   @override
   Widget build(BuildContext context) {
     final Templates prov = context.read<Templates>();
-    return Scaffold(
-      appBar: RawAppBar(
-        height: MediaQuery.of(context).size.height,
-        title: 'Templates',
-      ),
-      backgroundColor: ProjectColors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                for (int index = 0; index < prov.templates!.length; index++)
-                  prov.templates![index].date == null
-                      ? TemplatesCard(
-                          type: DescriptionType.time,
-                          onPressed: () => onPressed(context, index),
-                          data: prov.templates![index],
-                        )
-                      : Container()
-              ],
-            )
-          ],
+    return WillPopScope(
+      child: Scaffold(
+        appBar: RawAppBar(
+          height: MediaQuery.of(context).size.height,
+          title: 'Templates',
+        ),
+        backgroundColor: ProjectColors.white,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          child: ListView(
+            children: [
+              Column(
+                children: [
+                  for (int index = 0; index < prov.templates!.length; index++)
+                    prov.templates![index].date == null
+                        ? TemplatesCard(
+                            type: DescriptionType.time,
+                            onPressed: () => onPressed(context, index),
+                            data: prov.templates![index],
+                          )
+                        : Container()
+                ],
+              )
+            ],
+          ),
         ),
       ),
+      onWillPop: () async => false,
     );
   }
 
