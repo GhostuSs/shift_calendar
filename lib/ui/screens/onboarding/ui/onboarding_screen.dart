@@ -167,8 +167,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       }
                       if (currentIndex < OnBoardingImages.dataList.length - 1) {
                         currentIndex++;
-                        if (currentIndex == 2 || currentIndex == 1)
+                        if (currentIndex == 2 ||
+                            currentIndex == 1 ||
+                            currentIndex == 3) {
                           setState(() {});
+                        }
                         pageController.animateToPage(currentIndex,
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.linear);
