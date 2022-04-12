@@ -1,16 +1,12 @@
-# shift_calendar
+# Shift calendar <img src="https://github.com/GhostuSs/shift_calendar/blob/bb6b86d19a05b839a77890624259554c1b0e8132/assets/icons/appIcon.png" width="40" />
 
-shift calendar
+[![Flutter](https://img.shields.io/badge/-Flutter-090909?style=for-the-badge&logo=flutter&logoColor=47C5FB)](https://flutter.dev) [![Dart](https://img.shields.io/badge/-Dart-090909?style=for-the-badge&logo=dart&logoColor=097CDB)](https://dart.dev)
+____________________________________________________________________________________________________________________________________________________________________
+### IOS available.
+____________________________________________________________________________________________________________________________________________________________________
 
-## Getting Started
+### UI (Figma)
 
-This project is a starting point for a Flutter application.
+![Screenshot](https://github.com/GhostuSs/shift_calendar/blob/7026ceb772e344eb603bba0ecad656167a109d9a/assets/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202022-04-12%20%D0%B2%2003.23.32.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
